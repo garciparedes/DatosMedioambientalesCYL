@@ -13,38 +13,93 @@
 \newcommand\abs[1]{\left|#1\right|}
 
 
-\title{Algoritmo: Buscar el par de puntos mas cercano en espacio n-dimensional}
+\title{Visualización de Datos MedioAmbientales de Castilla y León}
 \author{Sergio García Prado}
 
 
 \begin{document}
 
-\begin{titlepage}
-	\centering
-	{\scshape\LARGE Universidad de Valladolid \par}
-	\vspace{1cm}
-	{\scshape\Large Diseño y Evaluación de Sistemas Interactivos\par}
-	\vspace{1.5cm}
-	{\huge\bfseries Visualización de Datos MedioAmbientales de Castilla y Leon\par}
-	\vspace{2cm}
-	{\Large\itshape Sergio García Prado\par}
+	\begin{titlepage}
+		\centering
+		{\scshape\LARGE Universidad de Valladolid \par}
+		\vspace{1cm}
+		{\scshape\Large Diseño y Evaluación de Sistemas Interactivos\par}
+		\vspace{1.5cm}
+		{\huge\bfseries Análisis y Visualización de Datos MedioAmbientales de Castilla y León\par}
+		\vspace{2cm}
+		{\Large\itshape Sergio García Prado\par}
 	
-	\vfill
-	Seguimiento del trabajo en: \par
-	\href{https://github.com/garciparedes/DatosMedioambientalesCYL}{github.com/garciparedes/DatosMedioambientalesCYL}
+		\vfill
+		Seguimiento del trabajo en: \par
+		\href{https://github.com/garciparedes/DatosMedioambientalesCYL}{github.com/garciparedes/DatosMedioambientalesCYL}
+		\vfill
 
-	\vfill
+
+		% Bottom of the page
+		{\large \today\par}
+	\end{titlepage}
 
 
-% Bottom of the page
-	{\large \today\par}
-\end{titlepage}
 
-\tableofcontents
+	\newpage
+		\tableofcontents
+	\newpage
 
-\section{Introducción}
 
-	\paragraph{}
-	Parrafo de prueba
+	\section{Introducción}
+
+
+		\paragraph{}
+		El análisis consiste en la obtención de aspectos poco obvios que se ocultan en los datos debido a la gran cantidad que manejaremos. Los datos han sido obtenidos a partir de la iniciativa de Datos Abiertos de la Junta de Castilla y León, concretamente estos se refieren a Datos Medioambientales.
+		
+
+
+	\section{Análisis de los datos}
+
+
+		\subsection{Estructura de los datos}
+			
+			\paragraph{}
+			Los datos que vamos a manejar se encuentran en fichero CSV, el cual a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de datos contenida en este es elevada (más de 5000 elementos).
+			
+			\paragraph{}
+			A pesar de estas dificultades si que podemos ver la cabecera del fichero, la cual nos da información de la estructura del mismo. Además gracias a la herramienta D3.js se ha obtenido información acerca de ellas. El fichero tiene las siguientes entradas:
+	
+			\begin{itemize}
+			
+				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Tras realizar una extracción de datos con D3 hemos obtenido que hay 
+
+				\item {\bf Provincia } Provincia a la que está referida el dato. Como sabemos la Comunidad Autónoma de Castilla y León está dividida en 9 provincias, por lo tanto a falta de comprobar que los datos se refieran únicamente a esta CA ya podemos deducir que esta entrada se refiere a información categórica. Conviene destacar que hay indicadores que no poseen información para todas las provincias, como es el caso del "Tráfico aéreo de pasajeros", que suponemos restringe la información a las provincias que disponen de aeropuerto. Este hecho es algo a tener en cuenta cuando representemos los datos.
+
+				\item {\bf Fecha Validez } Fecha hasta la cual el dato se toma como válido. Este campo se limita a mostrar el año de validez. Aunque esto se pueda pensar como categorías no es la manera correcta, ya que el tiempo es una variable continua. Esto es algo a tener en cuenta cuando elijamos la manera en que lo representaremos.
+
+				\item {\bf Valor } Valor que toma el dato respecto de su unidad. Este campo es el que contiene la "información valiosa" del dato, ya que es la unidad que se utilizará como medida. Se representa en forma de número racional positivo.
+
+				\item {\bf Unidad } Este campo nos proporciona la Unidad de Medida del dato, lo cual es algo muy importante a la hora de mostrar información.
+
+				\item {\bf Frecuencia } Este campo representa la periodicidad con la que se ha obtenido el dato. La mayoría de los datos se han obtenido anualmente, aunque también existen algunos que se han obtenido bianualmente, como es el caso de los "Espacios Naturales".
+			
+			\end{itemize}
+			
+			\paragraph{}
+			
+
+
+
+	\section{Planificación de la información}
+
+
+
+	\section{Diseño}
+
+
+
+	\section{Implementación}
+
+
+	
+	\section{Conclusiones}
+
+
 
 \end{document}
