@@ -4,9 +4,8 @@ var fileName ="http://www.datosabiertos.jcyl.es/web/jcyl/risp/es/mediciones/indi
 function extract(){
 
     d3.dsv(";", "text/plain; charset=ISO-8859-1")(fileName, function(data) {
+
         var len = data.length;
-        console.log(len);
-        console.log(data[0]);
         var indicadorList = new Array();
 
         for (i = 0; i < len; i++){
@@ -14,7 +13,6 @@ function extract(){
             if (indicadorList[data[i].Indicador] == undefined){
                 indicadorList[data[i].Indicador] = new Array();
             }
-
             indicadorList[data[i].Indicador].push(
                     {
                         Provincia: String(data[i]["Provincia"]),
@@ -25,51 +23,26 @@ function extract(){
                     }
             );
 
+
         }
-        console.log(indicadorList["Agricultura ecológica"]);
-        console.log(indicadorList["Consumo de energía del sector del transporte"]);
+        for (var key in indicadorList){
+            console.log(key);
+        }
 
-        console.log(
-            + "\n"
-            +pearsonCorrelation(
-                indicadorList
-                , "Consumo de energía del sector del transporte"
-                , "Consumo de energía del sector del transporte")
-            + "\n"
-        );
-
+        /*
         var p = 0.0;
         for (var key in indicadorList){
             for (var key2 in indicadorList){
-                try {
-                    p = pearsonCorrelation(indicadorList, key, key2);
-                    if (Math.abs(p)> 0.5 && Math.abs(p) !=1){
-                    console.log("\n"
-                        + key
-                        + "\n"
-                        + key2
-                        + "\n"
-                        + p
-                        + "\n"
+                p = pearsonCorrelation(indicadorList, key, key2);
+                if (Math.abs(p) > 0.5 && Math.abs(p) !=1){
+                    console.log( key + "\n"
+                        + key2 + "\n"
+                        + p + "\n"
                     );
                 }
-
-                }catch(err){
-                    console.log(
-                        " \n"
-                        + key
-                        + "\n"
-                        + key2
-                        + "\n"
-                        + err
-                        + "\n"
-                    );
-
-                }
-
             }
-
         }
+        */
 
     });
 }
@@ -115,10 +88,10 @@ function pearsonCorrelation(prefs, p1, p2) {
         sum2Sq += Math.pow(Y[i].Valor, 2);
     }
 
-  var pSum = 0;
-  for (var i = 0; i < n; i++) {
-    pSum += X[i].Valor * Y[i].Valor;
-  }
+    var pSum = 0;
+    for (var i = 0; i < n; i++) {
+        pSum += X[i].Valor * Y[i].Valor;
+    }
 
     var num = pSum - (sum1 * sum2 / n);
     var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
