@@ -17,35 +17,42 @@ function extract(){
 
             indicadorList[data[i].Indicador].push(
                     {
-                        Provincia: data[i]["Provincia"],
-                        FechaValidez: data[i]["Fecha validez"],
+                        Provincia: String(data[i]["Provincia"]),
+                        FechaValidez: Number(data[i]["Fecha validez"]),
                         Valor: Number(data[i]["Valor"].replace('.','')),
-                        Unidad: data[i]["Unidad"],
-                        Frecuencia: data[i]["Frecuencia"]
+                        Unidad: String(data[i]["Unidad"]),
+                        Frecuencia: Number(data[i]["Frecuencia"])
                     }
             );
 
         }
-        console.log(indicadorList["Agricultura ecológica"][0]);
+        console.log(indicadorList["Agricultura ecológica"]);
+        console.log(indicadorList["Consumo de energía del sector del transporte"]);
 
         console.log(
             + "\n"
-            +pearsonCorrelation(indicadorList, "Consumo de energía del sector del transporte", "Consumo de energía del sector del transporte")
+            +pearsonCorrelation(
+                indicadorList
+                , "Consumo de energía del sector del transporte"
+                , "Consumo de energía del sector del transporte")
             + "\n"
         );
 
-        /*
+        var p = 0.0;
         for (var key in indicadorList){
             for (var key2 in indicadorList){
-                //try {
+                try {
+                    p = pearsonCorrelation(indicadorList, key, key2);
+                    if (Math.abs(p)> 0.5 && Math.abs(p) !=1){
                     console.log("\n"
                         + key
                         + "\n"
                         + key2
                         + "\n"
-                        +pearsonCorrelation(indicadorList, key, key2)
+                        + p
                         + "\n"
                     );
+                }
 
                 }catch(err){
                     console.log(
@@ -63,8 +70,6 @@ function extract(){
             }
 
         }
-
-        */
 
     });
 }
@@ -85,39 +90,39 @@ function extract(){
  */
 function pearsonCorrelation(prefs, p1, p2) {
 
-    var lP1 = prefs[p1].length;
-    var lP2 = prefs[p2].length;
-    var n = lP1 * lP2;
+    var X = prefs[p1].reverse();
+    var Y = prefs[p2].reverse();
+
+    var lX = X.length;
+    var lY = Y.length;
+    var n = (lX < lY)? lX : lY;
 
     if (n == 0) return 0;
 
     var sum1 = 0;
-        for (var i = 0; i < lP1; i++) sum1 += prefs[p1][i].Valor;
+    for (var i = 0; i < n; i++) sum1 += X[i].Valor;
 
     var sum2 = 0;
-        for (var i = 0; i < lP2; i++) sum2 += prefs[p2][i].Valor;
+    for (var i = 0; i < n; i++) sum2 += Y[i].Valor;
 
     var sum1Sq = 0;
-    for (var i = 0; i < lP1; i++) {
-        sum1Sq += Math.pow(prefs[p1][i].Valor, 2);
+    for (var i = 0; i < n; i++) {
+        sum1Sq += Math.pow(X[i].Valor, 2);
     }
 
     var sum2Sq = 0;
-    for (var i = 0; i < lP2; i++) {
-        sum2Sq += Math.pow(prefs[p2][i].Valor, 2);
+    for (var i = 0; i < n; i++) {
+        sum2Sq += Math.pow(Y[i].Valor, 2);
     }
 
-    var pSum = 0;
-    for (var i = 0; i < lP1; i++) {
-        for (var j = 0; j < lP2; j++) {
-            pSum += prefs[p1][i].Valor * prefs[p2][j].Valor/n;
-        }
-    }
+  var pSum = 0;
+  for (var i = 0; i < n; i++) {
+    pSum += X[i].Valor * Y[i].Valor;
+  }
 
     var num = pSum - (sum1 * sum2 / n);
-
     var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
-                        (sum2Sq - Math.pow(sum2, 2) / n));
+                (sum2Sq - Math.pow(sum2, 2) / n));
 
     if (den == 0) return 0;
 
