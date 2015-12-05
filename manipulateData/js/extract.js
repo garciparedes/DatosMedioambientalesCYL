@@ -1,10 +1,12 @@
-var fileName ="Indicadores_medioambientales.csv";
+var fileName ="http://www.datosabiertos.jcyl.es/web/jcyl/risp/es/mediciones/indicadoresambientales/1284227444931.csv";
 
 
 function extract(){
 
-    d3.csv(fileName, function(data) {
+    d3.dsv(";", "text/plain; charset=ISO-8859-1")(fileName, function(data) {
         var len = data.length;
+        console.log(len);
+        console.log(data[0]);
         var indicadorList = new Array();
 
         for (i = 0; i < len; i++){
@@ -15,23 +17,55 @@ function extract(){
 
             indicadorList[data[i].Indicador].push(
                     {
-                        Provincia: data[i].Provincia,
-                        FechaValidez: data[i].FechaValidez,
-                        Valor: Number(data[i].Valor),
-                        Unidad: data[i].Unidad,
-                        Frecuencia: data[i].Frecuencia
+                        Provincia: data[i]["Provincia"],
+                        FechaValidez: data[i]["Fecha validez"],
+                        Valor: Number(data[i]["Valor"].replace('.','')),
+                        Unidad: data[i]["Unidad"],
+                        Frecuencia: data[i]["Frecuencia"]
                     }
             );
 
         }
-        //console.log(indicadorList["Agricultura ecológica"]);
+        console.log(indicadorList["Agricultura ecológica"][0]);
 
-        //console.log(pearsonCorrelation(indicadorList, "Agricultura ecológica", "Calidad del aire en el medio urbano. Contaminación por NO2"));
-        console.log(pearsonCorrelation(indicadorList, "Agricultura ecológica", "Agricultura ecológica"));
+        console.log(
+            + "\n"
+            +pearsonCorrelation(indicadorList, "Consumo de energía del sector del transporte", "Consumo de energía del sector del transporte")
+            + "\n"
+        );
 
+        /*
         for (var key in indicadorList){
-            //console.log(key);
+            for (var key2 in indicadorList){
+                //try {
+                    console.log("\n"
+                        + key
+                        + "\n"
+                        + key2
+                        + "\n"
+                        +pearsonCorrelation(indicadorList, key, key2)
+                        + "\n"
+                    );
+
+                }catch(err){
+                    console.log(
+                        " \n"
+                        + key
+                        + "\n"
+                        + key2
+                        + "\n"
+                        + err
+                        + "\n"
+                    );
+
+                }
+
+            }
+
         }
+
+        */
+
     });
 }
 
@@ -40,10 +74,7 @@ function extract(){
  *  @author matt.west@kojilabs.com (Matt West)
  *  @license Copyright 2013 Matt West.
  *  Licensed under MIT (http://opensource.org/licenses/MIT).
- */
-
-
-/**
+ *
  *  Calculate the person correlation score between two items in a dataset.
  *
  *  @param  {object}  prefs The dataset containing data about both items that
@@ -53,54 +84,40 @@ function extract(){
  *  @return {float}  The pearson correlation score.
  */
 function pearsonCorrelation(prefs, p1, p2) {
-    var si = [];
 
-    var valor = "Valor";
-
-    console.log(prefs[p1]);
-    console.log(prefs[p2]);
-
-    for (var key in prefs[p1]) {
-        if (prefs[p2][key][valor]) {
-            console.log(key);
-            si.push(key);
-        }
-    }
-
-    var n = si.length;
+    var lP1 = prefs[p1].length;
+    var lP2 = prefs[p2].length;
+    var n = lP1 * lP2;
 
     if (n == 0) return 0;
 
     var sum1 = 0;
-    for (var i = 0; i < si.length; i++){
-         sum1 += prefs[p1][si[i]][valor];
-     }
+        for (var i = 0; i < lP1; i++) sum1 += prefs[p1][i].Valor;
 
     var sum2 = 0;
-    for (var i = 0; i < si.length; i++){
-        sum2 += prefs[p2][si[i]][valor];
-    }
+        for (var i = 0; i < lP2; i++) sum2 += prefs[p2][i].Valor;
 
     var sum1Sq = 0;
-    for (var i = 0; i < si.length; i++) {
-        sum1Sq += Math.pow(prefs[p1][si[i]][valor], 2);
+    for (var i = 0; i < lP1; i++) {
+        sum1Sq += Math.pow(prefs[p1][i].Valor, 2);
     }
 
-
     var sum2Sq = 0;
-    for (var i = 0; i < si.length; i++) {
-        sum2Sq += Math.pow(prefs[p2][si[i]][valor], 2);
+    for (var i = 0; i < lP2; i++) {
+        sum2Sq += Math.pow(prefs[p2][i].Valor, 2);
     }
 
     var pSum = 0;
-    for (var i = 0; i < si.length; i++) {
-        pSum += (prefs[p1][si[i]][valor] * prefs[p2][si[i]][valor]);
+    for (var i = 0; i < lP1; i++) {
+        for (var j = 0; j < lP2; j++) {
+            pSum += prefs[p1][i].Valor * prefs[p2][j].Valor/n;
+        }
     }
 
     var num = pSum - (sum1 * sum2 / n);
-    var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
 
-    (sum2Sq - Math.pow(sum2, 2) / n));
+    var den = Math.sqrt((sum1Sq - Math.pow(sum1, 2) / n) *
+                        (sum2Sq - Math.pow(sum2, 2) / n));
 
     if (den == 0) return 0;
 
