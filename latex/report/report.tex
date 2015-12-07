@@ -51,22 +51,32 @@
 		\subsection{Motivación:}
 
 			\paragraph{}
-			El análisis consiste en la obtención de aspectos poco obvios que se ocultan en los datos debido a la gran cantidad de ellos que se va a manejar. Los datos han sido obtenidos a partir de la iniciativa de Datos Abiertos de la Junta de Castilla y León, concretamente estos se refieren a Datos Medioambientales.
-		
-		
+			La visualización que se va a realizar consiste en la representación gráfica de datos medioambientales de la Comunidad Autónoma de Castilla y León. El objetivo es descubrir aspectos poco obvios o destacar algo importante del conjunto de datos asignados.
+					
 		\subsection{Objetivos:}
 		
+			\paragraph{}
+			La representación gráfica que se va a realizar pretende mostrar el impacto que ha tenido el cierre de la Centrar Nuclear de Santa María de Garoña (Burgos) en el año 2012 y cómo la región solventado ese déficit energético en la actualidad (si es que lo ha hecho). También se pretende analizar si este suceso está correlacionado con el consumo energético en la zona.
 		
 		\subsection{Estructura:}
 
 	\section{Análisis de los datos}
 
-
 		\subsection{Descripción}
-
+			\paragraph{}
+			La Junta de Castilla y León suministra conjuntos de datos referentes a la comunidad autónoma. Para esta práctica se nos han asignado los datos medioambientales. 
 
 		\subsection{Adquicisión}
-
+			\paragraph{}
+			Los datos han sido obtenidos a partir de la iniciativa de Datos Abiertos de la Junta de Castilla y León. 		
+			\paragraph{}
+			El concepto "datos abiertos" es una filosofía y práctica que persigue que determinados tipos de datos estén disponibles de forma libre para todo el mundo, sin restricciones de derechos de autor, de patentes o de otros mecanismos de control. Tiene una ética similar a otros movimientos y comunidades abiertos, como el software libre, el código abierto y el acceso libre.
+			
+			\paragraph{}
+			Los datos han sido obtenidos a partir del siguiente enlace: \href{http://www.datosabiertos.jcyl.es/web/jcyl/set/es/mediciones/indicadoresambientales/1284227444931}{www.datosabiertos.jcyl.es/...}
+			
+			\paragraph{}
+			Una vez tenemos los datos procederemos a realizar el análisis de los mismos.
 
 		\subsection{Estructura de los datos}
 			
@@ -74,42 +84,79 @@
 			Los datos que vamos a manejar se encuentran en fichero CSV, el cual a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de datos contenida en este es elevada (más de 5000 elementos).
 			
 			\paragraph{}
-			A pesar de estas dificultades si que podemos ver la cabecera del fichero, la cual nos da información de la estructura del mismo. Además gracias a la herramienta D3.js se ha obtenido información acerca de ellas. El fichero tiene las siguientes entradas:
+			A pesar de estas dificultades si que podemos ver la cabecera del fichero, la cual nos da información de la estructura de los mismo y qué campos nos encontraremos en cada las entradas que contiene:
 	
 			\begin{itemize}
 			
-				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos con D3 hemos obtenido que hay 49 indicadores distintos. Dado que son muchos lo que habrá que hacer es tratar de seleccionar los que más se adecuen a lo que queremos mostrar dado que mostrar datos demasiado heterogéneos y sin relación dificulta la visión de lo que se pretende mostrar.
+				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos, hemos obtenido que hay 49 indicadores distintos. Debido a que la cantidad es muy numerosa habrá que tratar de seleccionar los que más se adecuen a lo que queremos mostrar debido a que mostrar demasiada información de manera inadecuada dificulta la visión de lo que se pretende mostrar.
 				
 				\item {\bf Provincia } Provincia a la que está referida el dato. Este campo es de tipo cualitativo nominal. Se refiere a la segmentación territorial de la comunidad autónoma. Como sabemos, Castilla y León está dividida en 9 provincias. Conviene destacar que hay indicadores que no poseen información para todas las provincias, como es el caso del "Tráfico aéreo de pasajeros", que suponemos restringe la información a las provincias que disponen de aeropuerto. Este hecho es algo a tener en cuenta cuando representemos los datos.
 
-				\item {\bf Fecha Validez } Fecha hasta la cual el dato se toma como válido. Representa una variable cuantitativa. El motivo es que es una variable temporal. A pesar de ello toma únicamente valores discretos (años) Esto es algo a tener en cuenta cuando elijamos la manera en que lo representaremos.
+				\item {\bf Fecha Validez } Fecha hasta la cual el dato se toma como válido. Representa una variable cuantitativa. La causa es que es una variable temporal. A pesar de ello toma únicamente valores discretos (años) Esto es algo a tener en cuenta cuando elijamos la manera en que lo representaremos.
 
 				\item {\bf Valor } Valor que toma el dato respecto de su unidad.  Representa una variable cuantitativa de tipo continuo. Este campo es el que contiene la "información valiosa" del dato, ya que es la unidad que se utilizará como medida. Se representa en forma de número racional positivo.
 
-				\item {\bf Unidad } Este campo nos proporciona la Unidad de Medida del dato, lo cual es algo muy importante a la hora de mostrar información.
+				\item {\bf Unidad } Este campo nos proporciona la Unidad de Medida del dato, lo cual es algo muy importante a la hora de mostrar información ya que siempre que se suministra información es muy importante señalar tanto la unidad de medida como la escala a la que corresponde la representación.
 
 				\item {\bf Frecuencia } Este campo representa la periodicidad con la que se ha obtenido el dato. La mayoría de los datos se han obtenido anualmente, aunque también existen algunos que se han obtenido bianualmente, como es el caso de los "Espacios Naturales".
 			
-			\end{itemize}
-			
-			
-			
-			
-			
-			\paragraph{}
-			
+			\end{itemize}			
 
 		\subsection{Calidad}
 		
-		\subsection{Mejoras}
-		
-		\subsection{Transformaciones}
-
+			\paragraph{}
+			A mi juicio la calidad de los datos es buena a pesar de que existen algunos puntos  mejorables.
+	
+			\paragraph{}
+			Me llama la atención la columna de "meses" que, entiendo que está ahí porque es necesario que se especifique la unidad de medida de la frecuencia, pero creo que se debería haber indicado en la cabecera del fichero. Además también he encontrado valores atípicos en algunos datos, posiblemente producidos por un error en las mediciones o al transcribirlo al documento.
+			
+		\subsection{Selección de datos y Transformaciones}
+			
+			\paragraph{}
+			Ahora determinaremos los datos que se utilizarán para la visualización. Como se dijo al principio del informe, el objetivo de la visualización será visualizar cómo a repercutido el cierre de la central nuclear en la región. Para ello nos vamos a apoyar en los siguientes indicadores:
+			
+			\begin{itemize}
+				\item Producción de energía con carbón
+				\item Producción de energía eólica
+				\item Producción de energía hidráulica
+				\item Producción de energía nuclear
+				\item Producción de energía primaria
+				\item Producción energía solar en Castilla y León
+				\item Consumo de energía final
+				\item Consumo de energía del sector del transporte
+				\item Consumo de energía del sector
+				\item Consumo doméstico de electricidad
+				\item Consumo doméstico de gas natural
+				\item Consumo doméstico de G.L.P.
+				\item Consumo doméstico de productos petrolíferos
+			\end{itemize}
+			
+			\paragraph{}
+			De cada uno de estos indicadores se pretente utilizar los datos de todas las provincias así como fechas. Cabe destacar que fusionaremos los siguientes indicadores para simplificar la visualización:
+			\begin{itemize}
+				\item Producción de energía con carbón
+				\item Producción de energía eólica
+				\item Producción de energía hidráulica
+				\item Producción de energía nuclear
+				\item Producción de energía primaria
+				\item Producción energía solar en Castilla y León
+			\end{itemize}
+			
+			\paragraph{}
+			Fusionaremos estos indicadores en uno nuevo llamado Producción energética cuyo valor será el sumatorio de estos. La unidad de medida de todos ellos es "Toneladas equivalentes de petróleo" por lo cual no habrá que realizar ningún cambio de unidad para poder combinarlos en el nuevo indicador.
+			
+			\begin{itemize}
+				\item Consumo doméstico de electricidad
+				\item Consumo doméstico de gas natural
+				\item Consumo doméstico de G.L.P.
+				\item Consumo doméstico de productos petrolíferos
+			\end{itemize}
+			
+			\paragraph{}
+			Fusionaremos estos indicadores en uno nuevo llamado Consumo Doméstico cuyo valor será el sumatorio de estos. En este caso los valores no tienen la misma unidad de medida, por lo que habrá que adaptar cada uno de ellos a la misma para luego crear el nuevo indicador a partir de estos.
+			
 
 	\section{Planificación de la información}
-	
-		\subsection{Público Objetivo}
-		
 
 		\subsection{Propósito de la visualización:}
 	
@@ -126,10 +173,10 @@
 	\section{Diseño}
 	
 		\subsection{Datos a usar:}
-	
+		
 	
 		\subsection{Forma de representación:}
-	
+		
 	
 		\subsection{Decisiones de presentación:}
 
