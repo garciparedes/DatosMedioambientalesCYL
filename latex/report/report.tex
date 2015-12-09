@@ -48,17 +48,16 @@
 
 	\section{Introducción}
 
-		\subsection{Motivación:}
+		\subsection{Motivación}
 
 			\paragraph{}
 			La visualización que se va a realizar consiste en la representación gráfica de datos medioambientales de la Comunidad Autónoma de Castilla y León. El objetivo de la práctica es descubrir aspectos poco obvios o destacar algo importante del conjunto de datos asignados.
 
-		\subsection{Objetivos:}
+		\subsection{Objetivos}
 
 			\paragraph{}
-			La representación gráfica que se va a realizar pretende mostrar el impacto que ha tenido el cierre de la Centrar Nuclear de Santa María de Garoña (Burgos) en el año 2012 y representar cómo ha solventado la región ese déficit energético (si es que lo ha hecho). También se pretende analizar si este suceso está ha afectado al consumo energético en la zona.
-
-		\subsection{Estructura:}
+			La representación gráfica que se va a realizar pretende mostrar el flujo energético en Castilla y León durante los últimos años. 
+			Además una vez se pueda visualizar la implementación se pretenden obtener conclusiones sobre el impacto que ha tenido el cierre de la Centrar Nuclear de Santa María de Garoña (Burgos) en el año 2012 y representar cómo ha solventado la región ese déficit energético (si es que lo ha hecho). También se pretende analizar si este suceso está ha afectado al consumo energético en la zona.
 
 	\section{Análisis de los datos}
 
@@ -144,7 +143,10 @@
 			Fusionaremos estos indicadores en uno nuevo que denominaremos "Producción de energía final" cuyo valor será el sumatorio de todos los métodos de producción (Carbón, Eólica, Hidráulica, Nuclear, Primaria y Solar). La unidad de medida de todos ellos es "Toneladas Equivalentes de Petróleo" por lo cual no habrá que realizar ningún cambio de unidad para poder fusionarlos.
 
 			\paragraph{}
-			 También fusionaremos los indicadores relacionados con el consumo doméstico en uno nuevo que  denominaremos  "Consumo Doméstico" cuyo valor será el sumatorio de estos (Electricidad, Gas Natural, G.L.P. y Productos Petrolíferos). En este caso la información no tiene la misma unidad de medida para todos ellos, por lo que habrá que adaptar cada uno de ellos a la misma (Toneladas Equivalentes de Petróleo) para luego crear el nuevo indicador a partir de estos. El motivo de convertirlos en Toneladas Equivalentes de Petróleo nos servirá para luego compararlos con la producción.
+			Para clarificar el tipo de energía que se utiliza se ha decidido crear dos otros dos nuevos indicadores denominados "Producción de Energía Renovable" y "Producción de Energía No Renovable" que se formarán a partir del sumatorio de sus respectivos métodos de energía.
+
+			\paragraph{}
+			 También fusionaremos los indicadores relacionados con el consumo doméstico en uno nuevo que  denominaremos  "Consumo Doméstico" cuyo valor será el sumatorio de estos (Electricidad, Gas Natural, G.L.P. y Productos Petrolíferos). En este caso la información no tiene la misma unidad de medida para todos ellos, por lo que habrá que adaptar cada uno de ellos a la misma (Toneladas Equivalentes de Petróleo) para luego crear el nuevo indicador a partir de estos. El motivo de convertirlos en Toneladas Equivalentes de Petróleo nos servirá para luego compararlos con los indicadores de  producción energética.
 
 
 	\section{Planificación de la información}
@@ -155,7 +157,7 @@
 			El proyecto de visualización se va a enfocar en el sector energético. El objetivo de la visualización es mostrar la relación entre la producción y el consumo energético de la comunidad autónoma. Además de mostrar la proporción tanto de los diferentes métodos de producción como de las formas de consumo y cómo estas han variado durante el tiempo.
 
 			\paragraph{}
-			También se pretende obtener conclusiones acerca de si el déficit producido por el cierre de la central nuclear de Santa María de Garoña (Burgos) en la producción energética de la comunidad autónoma ha sido compensado con el incremento de la producción mediante otros métodos alternativos. También queremos analizar si este déficit a afectado al consumo energético, que se prevee que no ya que probablemente se habrá importado de comunidades colindantes.
+			También se pretende obtener conclusiones acerca de si el déficit producido por el cierre de la central nuclear de Santa María de Garoña (Burgos) en la producción energética de la comunidad autónoma ha sido compensado con el incremento de la producción mediante otros métodos alternativos. También queremos analizar si este déficit a afectado al consumo energético, que se intuye que no ya que probablemente se habrá importado de comunidades colindantes.
 
 		\subsection{Factores que afectan al proyecto}
 
@@ -166,52 +168,135 @@
 	\section{Diseño}
 
 		\paragraph{}
-		Se proponen varias alternativas para la visualización.
+		Antes de nada se hablará sobre los tonos escogidos para representar la información ya que es un tema importante a la hora de representar información. Dado que lo que se quiere resaltar es la dualidad entre producción y consumo de energía una primera idea fue la de utilizar los colores rojo y verde, pero esta idea se descartó debido a que en muchas culturas los todos rojo y verde no tienen el mismo significado que en la nuestra. Es por ello que se ha decidido utilizar la metáfora de temperatura. Esto es por que es algo que en todas las cultura se entiende que el naranja significa calor y el azul frío. Además estos colores son  complementarios entre sí, esto hace que se puedan distinguir fácilmente entre sí. Por estos motivos utilizaremos el azul para representar la producción y el naranja para el consumo.
+		
+		\paragraph{}
+		La visualización tiene como objetivo ser un componente que se acoplará a una página web para poder visualizar la relación entre producción y consumo, así como el desglose de estas dos variables para conocer la procedencia de cada una de ellas. Se proponen varias alternativas para la visualización.
 
 
-		\subsection{Alternativa 1}
+		\subsection{1ª Alternativa}
 
 			\subsubsection{Introducción}		
 
 				\paragraph{}
-				La visualización que se pretende implementar tiene como objetivo ser un "widget" que se acoplará a una página web para poder visualizar la relación entre producción y consumo, así como el desglose de estas dos variables para conocer la procedencia de cada una de ellas. La estructura de componente será de 3 pestañas (Relación entre Producción y Consumo, Producción y Consumo). Se ha escogido esta estrategia ya que mostrar toda la información a la vez además de ser menos atractiva visualmente, puede dificultar el entendimiento de la información. A continuación procederemos a detallar cada una de las pestañas.
+				 La estructura del componente será de 3 pestañas (Relación entre Producción y Consumo, Producción y Consumo). Se ha escogido esta estrategia ya que mostrar toda la información a la vez además de ser menos atractiva visualmente, puede dificultar el entendimiento de la información. A continuación procederemos a detallar cada una de las pestañas.
 
 			\subsubsection{Visualización de la relación entre producción y consumo}
 
 				\paragraph{}
 				Esta visualización será la que englobará toda la información. Para ello se utilizarán los indicadores "Consumo de energía final" y "Producción de energía final" (anteriormente hemos descrito cómo obtenerlo). La visualización se basará en dos gráficos:
+				
 				\begin{itemize}
-					\item Map Char
+				
+					\item Mapa de Coropletas (Choropleth Map): La visualización se compondrá de un mapa de coropletas en el cual se muestre la relación entre producción y consumo de cada una de las provincias. Este mapa además de para representar información se utilizará para seleccionar las provincias de las que se quiere obtener información. Estás se resaltarán al clickar sobre ellas y el resto de la información del componente cambiará. Este mapa deberá ir acompañado de su respectiva leyenda que indique la diferencia proporcional entre producción y consumo. También mostrará un texto con el nombre de cada provincia al colocar el puntero encima de él, ya que no podemos deducir que las personas que van a ver la representación se conozcan la geografía española.
+					
+					\item Gráfico líneas (Line Chart): Con este gráfico se representar la evolución temporal de la  diferencia entre producción y consumo.
+					
 				\end{itemize}
 
 			\subsubsection{Visualización de producción}
 
+				\begin{itemize}
+				
+					\item Mapa de Coropletas (Choropleth Map): Al igual que con el mapa de coropletas de la pestaña anterior, este serviría para representar la diferencia entre provincias en la producción de energía. Pero en este caso la medida es la producción por provincia.
+					
+					\item Gráfico apilado de areas (Stacked Area Chart): Con este gráfico se representa el peso de cada método de producción durante el tiempo. Nos da una visión fiel de cómo han variado cada uno de los métodos de producción y cual es su peso en el aporte global de la producción. los colores escogidos para cada una de las métodos de producción serían colores por defecto.
+					
+				\end{itemize}
+
 			\subsubsection{Visualización de consumo}
 
 				\paragraph{}
-				Para simplificar la visualización se agregará un mapa de Castilla y Leon el cual represente la diferencia por provincias y así sea sencillo distinguir cuales son las que más cantidad aportan, tanto de producción como de consumo.
-
+				Esta pestaña tendría el mismo contenido que la visualización de producción solo que mostrando los respectivos datos de consumo. También cambiaría el color del mapa de cloropletas a tonos naranjas, para distinguirse de la anterior pestaña y además simbolizar que el consumo es algo que se debe reducir en la media de lo posible.
+				
+			\paragraph{}
+			Se ha creado un boceto correspondientes a esta alternativa. Este se encuentra en la figura \ref{sketch1} y esta compuesto por las 3 pestañas de la representación.
+				
+		\subsection{2ª Alternativa}
+		
+			\subsubsection{Introducción}
+				
 				\paragraph{}
-				Para ello la visualización contará con 3 "secciones" referidas a la producción, al consumo y a la relación entre estas dos variables respectivamente.
-
+				La segunda alternativa que se propone es no depender de pestañas para mostrar la información, es decir, mostrar todo de un único vistazo. Esta variable tiene la desventaja de que a pesar de mostrar la relación entre producción y consumo con todos sus componentes en una sola vista exige "ocultar" la medida temporal. Con ocultar nos referimos a que no se puede ver de forma estática sino que tenemos que ir avanzando el tiempo mediante un control de reproducción al estilo de un reproductor multimedia.
+			
+			\subsubsection{Composición}
 				\paragraph{}
-				Las visualizaciones de producción y consumo serán similares. Por lo tanto se explicará el gráfico de producción y al de consumo se aplicará la misma idea con sus respectivas variables.
-
+				La visualización estaría compuesta por los siguientes gráficos:
+				
+				\begin{itemize}
+					
+					\item Mapa de Coropletas (Choropleth Map): Al igual que en la anterior propuesta, se mostrará un mapa de la comunidad autónoma, una vez más para ilustrar la relación entre producción y consumo.
+					
+					\item Diagrama  Samkey (Samkey Diagram): En este caso la descomposión de los métodos de descomposición y las formas de consumo se ilustrarían en este mismo gráfico. La información se dividiría de la siguiente forma. A la izquierda se pondría el peso de la producción interna y externa. Seguidamente se descompondría la producción interna con los indicadores que se poseen (eólica, carbón, nuclear, etc.) hasta llegar al centro en el que se fusionarían todos estos indicadores en consumo, el cual de la misma manera se iría descomponiendo hacia la derecha en los indicadores que se poseen (transporte, industrial, etc.). Esto se ha representado mediante el  boceto  correspondiente a la figura \ref{sketchSankey}
+							
+				\end{itemize}
+				
 				\paragraph{}
-				Se pretende que contenga el mapa citado anteriormente junto con un "Stacked Area Chart" con el que se mostrará la aportación de cada una de las formas la producción respecto del tiempo. Para la producción serán: Producción de energía con carbón, eólica, hidráulica, nuclear, primaria y solar. Con este tipo de gráfico se puede visualizar las variaciones que estas han tenido durante el tiempo, además de la aportación que hace cada una de ellas a la producción total de energía.
-
+				Se han creado dos bocetos correspondientes a esta alternativa. Estos son las figuras \ref{sketch21} y \ref{sketch22}.
+				
 				\paragraph{}
-				Respecto de la visualización de la relación entre producción y consumo hay varios factores a tener en cuenta.
+				Dado que con esta nueva alternativa se ha perdido la visión directa de evaluación temporal a continuación se propone una nueva alternativa que solucione este defecto.
 
+		\subsection{3ª Alternativa (Definitiva)}
+
+			\paragraph{}
+			Esta tercera alternativa se compone de los mismos elementos que la segunda, pero además se le ha añadido un elemento que se utilizaba en la primera representación pero fue descartado. 
+			
+			\paragraph{}
+			Se ha añadido un Gráfico de Líneas (LineChart) que se además de presentar la evolución temporal de las variables producción y consumo este servirá para controlar el momento temporal del resto de la representación, es decir, actuará como el "control de reproducción" de la alternativa anterior. Por lo que ya no tiene sentido que este siga en la representación. 
+
+			\paragraph{}
+			Se ha creado un boceto correspondientes a esta alternativa. Este se encuentra en la figura \ref{sketch3}.
 
 	\section{Implementación}
 
-		\subsection{Bocetos:}
+		\subsection{Bocetos}
+		
+			\paragraph{}
+			A continuación se muestran los bocetos diseñados para la representación.
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=140mm]{../res/sketch-sankey.jpg}
+				\caption{Alternativa 2 - Boceto Sankey \label{sketchSankey}}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=100mm]{../res/design2-1.png}
+				\includegraphics[width=100mm]{../res/design2-2.png}
+				\includegraphics[width=100mm]{../res/design2-3.png}
+				\caption{Alternativa 1 - Representación 1 \label{sketch1}}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=130mm]{../res/design3.png}
+				\caption{Alternativa 2 - Representación 1 \label{sketch21}}
+			\end{figure}
+		
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=130mm]{../res/design4.png}
+				\caption{Alternativa 2 - Representación 2 \label{sketch22}}
+			\end{figure}
 
-
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=130mm]{../res/design5.png}
+				\caption{Alternativa 3  - Representación 1\label{sketch3}}
+			\end{figure}
+			
 	\section{Conclusiones}
 
-		\subsection{Conclusiones:}
+		\subsection{Conclusiones}
+			
+			\paragraph{}
+			Tras analizar las dos alternativas expuestas se seleccionó la segunda alternativa, concretamente la segunda representación ya que es la que mejor estética tiene de entre las dos.
+			
+			\paragraph{}
+			Se ha escogido esta alternativa frente a la primera porque permite "de un solo vistazo" conocer el flujo de energía de la comunidad autónoma sacrificando la visión directa del tiempo.
+
 
 
 		\subsection{Aspectos a Resaltar}
