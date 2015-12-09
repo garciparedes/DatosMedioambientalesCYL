@@ -1,9 +1,11 @@
-\documentclass{article}
+\documentclass[11pt,spanish]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{graphicx}
 
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
 
 \usepackage{hyperref}
 
@@ -81,14 +83,14 @@
 		\subsection{Estructura de los datos}
 
 			\paragraph{}
-			Los datos que vamos a manejar se encuentran en fichero con formato CSV (un tipo de documento en formato abierto sencillo para representar datos en forma de tabla, en las que las columnas se separan por comas (o punto y coma) y las filas por saltos de línea.), el cual a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de información contenida en este grande (más de 5000 elementos).
+			Los datos que vamos a manejar se encuentran en fichero con formato CSV (un tipo de documento en formato abierto sencillo para representar datos en forma de tabla, en las que las columnas se separan por comas (o punto y coma) y las filas por saltos de línea.), el cual, a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de información contenida en este grande (más de 5000 elementos).
 
 			\paragraph{}
-			A pesar de estas dificultades, fijándonos en la cabecera del fichero, la cual nos da información de la estructura de los mismo, podemos conocer lo campos nos encontraremos en cada una de las filas que contiene:
+			A pesar de estas dificultades, fijándonos en la cabecera del fichero, la cual nos muestra información de la estructura, podemos conocer lo campos que nos encontraremos en cada una de las filas que contiene:
 
 			\begin{itemize}
 
-				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos, hemos obtenido que hay 49 indicadores distintos. Debido a que la cantidad es numerosa habrá que tratar de seleccionar los que más se adecuen a lo que queremos mostrar debido a que mostrar demasiada información de manera inadecuada dificulta la visión de lo que se pretende representar.
+				\item {\bf Indicador } Contiene información sobre a qué se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos, hemos obtenido que hay 49 indicadores distintos. Debido a que la cantidad es numerosa habrá que tratar de seleccionar los que más se adecuen a lo que queremos mostrar debido a que mostrar demasiada información de manera inadecuada dificulta la visión de lo que se pretende representar.
 
 				\item {\bf Provincia } Provincia a la que está referida la información. Este campo es de tipo cualitativo nominal. Se refiere a la segmentación territorial de la comunidad autónoma. Como sabemos, Castilla y León está dividida en 9 provincias. Conviene señalar que hay indicadores que no poseen información para todas las provincias, como es el caso del "Tráfico aéreo de pasajeros", que suponemos que restringe la información a las provincias que disponen de aeropuerto ya que el resto tendrían valor 0 y no tiene sentido indicarlo. Este hecho es algo a tener en cuenta cuando representemos la información.
 
@@ -105,10 +107,10 @@
 		\subsection{Calidad}
 
 			\paragraph{}
-			A mi juicio la calidad de los datos es buena a pesar de que existen algunos puntos  mejorables.
+			A mi juicio la calidad de los datos es buena a pesar de que existen algunos puntos mejorables.
 
 			\paragraph{}
-			Me llama la atención la columna de "meses" que, entiendo que está ahí porque es necesario espedificar la unidad de medida de la frecuencia, pero creo que se debería haber indicado en la cabecera del fichero. Además también he encontrado valores atípicos en algunos datos, posiblemente producidos por un error en las mediciones o al transcribirlo al documento.
+			Me llama la atención la columna de "meses" que, entiendo que está ahí porque es necesario especificar la unidad de medida de la frecuencia, pero creo que se debería haberse indicado en la cabecera del fichero. Además también he encontrado valores atípicos en algunos datos, posiblemente producidos por un error en las mediciones o al transcribirlo al documento.
 
 		\subsection{Selección de datos}
 
@@ -147,6 +149,9 @@
 
 			\paragraph{}
 			 También fusionaremos los indicadores relacionados con el consumo doméstico en uno nuevo que  denominaremos  "Consumo Doméstico" cuyo valor será el sumatorio de estos (Electricidad, Gas Natural, G.L.P. y Productos Petrolíferos). En este caso la información no tiene la misma unidad de medida para todos ellos, por lo que habrá que adaptar cada uno de ellos a la misma (Toneladas Equivalentes de Petróleo) para luego crear el nuevo indicador a partir de estos. El motivo de convertirlos en Toneladas Equivalentes de Petróleo nos servirá para luego compararlos con los indicadores de  producción energética.
+			 
+			 \paragraph{}
+			 Por último convertiremos todas las variables que no están dadas en "Toneladas Equivalentes de Petróleo" para así poder compararlas fielmente entre sí.
 
 
 	\section{Planificación de la información}
@@ -168,29 +173,28 @@
 	\section{Diseño}
 
 		\paragraph{}
-		Antes de nada se hablará sobre los tonos escogidos para representar la información ya que es un tema importante a la hora de representar información. Dado que lo que se quiere resaltar es la dualidad entre producción y consumo de energía una primera idea fue la de utilizar los colores rojo y verde, pero esta idea se descartó debido a que en muchas culturas los todos rojo y verde no tienen el mismo significado que en la nuestra. Es por ello que se ha decidido utilizar la metáfora de temperatura. Esto es por que es algo que en todas las cultura se entiende que el naranja significa calor y el azul frío. Además estos colores son  complementarios entre sí, esto hace que se puedan distinguir fácilmente entre sí. Por estos motivos utilizaremos el azul para representar la producción y el naranja para el consumo.
+		Primeramente se hablará sobre los colores escogidos para representar la información ya que es un tema muy importante. Dado que lo que se quiere resaltar es la dualidad entre producción y consumo de energía una primera idea fue la de utilizar los colores rojo y verde, pero esta idea se descartó debido a que en muchas culturas los tonos rojo y verde no tienen el mismo significado que en la nuestra. Es por ello que se ha decidido utilizar la metáfora de temperatura. Esto se debe a que es algo que en todas las culturas se entiende que el naranja significa calor y el azul frío. Además estos colores son complementarios entre sí, esto hace que se puedan distinguir fácilmente entre sí. Por estos motivos utilizaremos el azul para representar la producción y el naranja para el consumo.
 		
 		\paragraph{}
-		La visualización tiene como objetivo ser un componente que se acoplará a una página web para poder visualizar la relación entre producción y consumo, así como el desglose de estas dos variables para conocer la procedencia de cada una de ellas. Se proponen varias alternativas para la visualización.
-
+		La visualización tiene va a ser un componente que se acoplará en una página web para poder visualizar la relación entre producción y consumo, así como el desglose de estas dos variables para conocer la procedencia de cada una de ellas. Se proponen varias alternativas para la visualización.
 
 		\subsection{1ª Alternativa}
 
 			\subsubsection{Introducción}		
 
 				\paragraph{}
-				 La estructura del componente será de 3 pestañas (Relación entre Producción y Consumo, Producción y Consumo). Se ha escogido esta estrategia ya que mostrar toda la información a la vez además de ser menos atractiva visualmente, puede dificultar el entendimiento de la información. A continuación procederemos a detallar cada una de las pestañas.
+				 La estructura del componente será de 3 pestañas (Relación entre Producción y Consumo, Producción y Consumo). Se ha escogido esta estrategia por que mostrar toda la información a la vez además de ser menos atractiva visualmente, puede dificultar el entendimiento de la información. A continuación procederemos a detallar cada una de las pestañas.
 
 			\subsubsection{Visualización de la relación entre producción y consumo}
 
 				\paragraph{}
-				Esta visualización será la que englobará toda la información. Para ello se utilizarán los indicadores "Consumo de energía final" y "Producción de energía final" (anteriormente hemos descrito cómo obtenerlo). La visualización se basará en dos gráficos:
+				Esta visualización será la que englobe toda la información. Para ello se utilizarán los indicadores "Consumo de energía final" y "Producción de energía final" (anteriormente hemos descrito cómo obtenerlo). La visualización se basará en dos gráficos:
 				
 				\begin{itemize}
 				
-					\item  {\bf Mapa de Coropletas} (Choropleth Map) La visualización se compondrá de un mapa de coropletas en el cual se muestre la relación entre producción y consumo de cada una de las provincias. Este mapa además de para representar información se utilizará para seleccionar las provincias de las que se quiere obtener información. Estás se resaltarán al clickar sobre ellas y el resto de la información del componente cambiará. Este mapa deberá ir acompañado de su respectiva leyenda que indique la diferencia proporcional entre producción y consumo. También mostrará un texto con el nombre de cada provincia al colocar el puntero encima de él, ya que no podemos deducir que las personas que van a ver la representación se conozcan la geografía española.
+					\item  {\bf Mapa de Coropletas} (Choropleth Map) La visualización se compondrá de un mapa de coropletas en el cual se muestrará la relación entre producción y consumo en cada una de las provincias. Este mapa además de para representar información se utilizará también para seleccionar las provincias de las que se quiere obtener información unitaria. Estás se resaltarán al clickar sobre ellas y el resto de representación del componente cambiarán. Este mapa deberá ir acompañado de su respectiva leyenda que indique la diferencia proporcional entre producción y consumo. También mostrará un texto con el nombre de cada provincia al colocar el puntero encima de él, ya que no podemos deducir que las personas que van a ver la representación se conozcan la geografía española.
 					
-					\item  {\bf Gráfico líneas} (Line Chart) Con este gráfico se representar la evolución temporal de la  diferencia entre producción y consumo.
+					\item  {\bf Gráfico líneas} (Line Chart) Con este gráfico se representar la evolución temporal de la  diferencia entre producción y consumo. Al colocarnos encima de el se mostrará el valor de las dos variables en ese punto.
 					
 				\end{itemize}
 
@@ -198,16 +202,16 @@
 
 				\begin{itemize}
 				
-					\item  {\bf Mapa de Coropletas} (Choropleth Map) Al igual que con el mapa de coropletas de la pestaña anterior, este serviría para representar la diferencia entre provincias en la producción de energía. Pero en este caso la medida es la producción por provincia.
-					
-					\item  {\bf Gráfico apilado de areas}(Stacked Area Chart) Con este gráfico se representa el peso de cada método de producción durante el tiempo. Nos da una visión fiel de cómo han variado cada uno de los métodos de producción y cual es su peso en el aporte global de la producción. los colores escogidos para cada una de las métodos de producción serían colores por defecto.
+					\item  {\bf Mapa de Coropletas} (Choropleth Map) Al igual que con el mapa de coropletas de la pestaña anterior, este serviría para representar la diferencia entre provincias en la producción de energía. Pero en este caso la únicamente la medida es la producción por provincia.
+	
+					\item  {\bf Gráfico apilado de areas}(Stacked Area Chart) Con este gráfico se representa el peso de cada método de producción durante el tiempo. Nos muestra una visión fiel de cómo han variado cada uno de los métodos de producción en el tiempo y cual es su peso en el aporte global de la producción. Los colores escogidos para cada una de las métodos de producción pertenecerán a una paleta de colores equidistantes.
 					
 				\end{itemize}
 
 			\subsubsection{Visualización de consumo}
 
 				\paragraph{}
-				Esta pestaña tendría el mismo contenido que la visualización de producción solo que mostrando los respectivos datos de consumo. También cambiaría el color del mapa de cloropletas a tonos naranjas, para distinguirse de la anterior pestaña y además simbolizar que el consumo es algo que se debe reducir en la media de lo posible.
+				Esta pestaña tendrá el mismo contenido que la visualización de producción solo que mostrando los respectivos datos de consumo. También cambiaría el color del mapa de cloropletas a tonos naranjas, para distinguirse de la anterior pestaña y además simbolizar que el consumo es algo que se debe reducir en la media de lo posible.
 				
 			\paragraph{}
 			Se ha creado un boceto correspondientes a esta alternativa. Este se encuentra en la figura \ref{sketch1} y esta compuesto por las 3 pestañas de la representación.
@@ -217,22 +221,26 @@
 			\subsubsection{Introducción}
 				
 				\paragraph{}
-				La segunda alternativa que se propone es no depender de pestañas para mostrar la información, es decir, mostrar todo de un único vistazo. Esta variable tiene la desventaja de que a pesar de mostrar la relación entre producción y consumo con todos sus componentes en una sola vista exige "ocultar" la medida temporal. Con ocultar nos referimos a que no se puede ver de forma estática sino que tenemos que ir avanzando el tiempo mediante un control de reproducción al estilo de un reproductor multimedia.
-			
+				La segunda alternativa que se propone es no depender de pestañas para mostrar la información, es decir, mostrar todo de un único vistazo. Esta representación tiene la desventaja de que a pesar de mostrar la relación entre producción y consumo con todos sus componentes en una sola vista exige "ocultar" la medida temporal. Con ocultar nos referimos a que no se puede ver de forma estática sino que tenemos que ir avanzando el tiempo mediante un control de reproducción al estilo de un reproductor multimedia.
+							
 			\subsubsection{Composición}
+			
 				\paragraph{}
-				La visualización estaría compuesta por los siguientes gráficos:
+				La visualización estará compuesta por los siguientes gráficos:
 				
 				\begin{itemize}
 					
-					\item  {\bf Mapa de Coropletas }(Choropleth Map) Al igual que en la anterior propuesta, se mostrará un mapa de la comunidad autónoma, una vez más para ilustrar la relación entre producción y consumo.
+					\item  {\bf Mapa de Coropletas }(Choropleth Map) Al igual que en la anterior alternativa, se mostrará un mapa de la comunidad autónoma, una vez más para ilustrar la relación entre producción y consumo. Este tendrá las mismas características que el anterior.
 					
-					\item  {\bf Diagrama  Samkey }(Samkey Diagram): En este caso la descomposión de los métodos de descomposición y las formas de consumo se ilustrarían en este mismo gráfico. La información se dividiría de la siguiente forma. A la izquierda se pondría el peso de la producción interna y externa. Seguidamente se descompondría la producción interna con los indicadores que se poseen (eólica, carbón, nuclear, etc.) hasta llegar al centro en el que se fusionarían todos estos indicadores en consumo, el cual de la misma manera se iría descomponiendo hacia la derecha en los indicadores que se poseen (transporte, industrial, etc.). Esto se ha representado mediante el  boceto  correspondiente a la figura \ref{sketchSankey}
+					\item  {\bf Diagrama  Sankey }(Sankey Diagram): En este caso la descomposición de los métodos de producción y las formas de consumo se ilustrarían en este mismo gráfico. La información se dividiría de la siguiente forma. A la izquierda se localizará la cantidad de producción interna y externa. Seguidamente se descompondría la producción interna con los indicadores que se poseen (eólica, carbón, nuclear, etc.) hasta llegar al centro en el que se fusionarán todos estos indicadores en consumo, el cual, de la misma manera se irá descomponiendo hacia la derecha en los indicadores que se tienen (transporte, industrial, etc.). Esto se ha representado mediante el  boceto  correspondiente a la figura \ref{sketchSankey}.
 							
 				\end{itemize}
 				
 				\paragraph{}
-				Se han creado dos bocetos correspondientes a esta alternativa. Estos son las figuras \ref{sketch21} y \ref{sketch22}.
+				También tendrá un "control de reproducción" para selección la fecha sobre la que queremos obtener la información
+				
+				\paragraph{}
+				Se han creado dos bocetos correspondientes a esta alternativa. Estos son las figuras \ref{sketch21} y \ref{sketch22}.  Los colores que se muestran en el Diagrama Sankey de estos bocetos no se sabe si serán los definitivos, ya que esta es una imagen de ejemplo obtenida de la red. Se utilizará una paleta de tonos equidistantes, pero que no varíe mucho el diseño final, es decir, que resalte los colores de manera sutil para así no perder la estética obtenida con los tonos naranja y azul.
 				
 				\paragraph{}
 				Dado que con esta nueva alternativa se ha perdido la visión directa de evaluación temporal a continuación se propone una nueva alternativa que solucione este defecto.
@@ -243,7 +251,7 @@
 			Esta tercera alternativa se compone de los mismos elementos que la segunda, pero además se le ha añadido un elemento que se utilizaba en la primera representación pero fue descartado. 
 			
 			\paragraph{}
-			Se ha añadido un  {\bf Gráfico de Líneas} (LineChart) que se además de presentar la evolución temporal de las variables producción y consumo este servirá para controlar el momento temporal del resto de la representación, es decir, actuará como el "control de reproducción" de la alternativa anterior. Por lo que ya no tiene sentido que este siga en la representación. 
+			Se ha añadido un  {\bf Gráfico de Líneas} (LineChart) que se además de presentar la evolución temporal de las variables producción y consumo servirá para controlar el momento temporal del resto de la representación, es decir, actuará como el "control de reproducción" de la alternativa anterior. Por lo que ya no tiene sentido que este siga en la representación. 
 
 			\paragraph{}
 			Se ha creado un boceto correspondientes a esta alternativa. Este se encuentra en la figura \ref{sketch3}.
@@ -253,7 +261,7 @@
 		\subsection{Bocetos}
 		
 			\paragraph{}
-			A continuación se muestran los bocetos diseñados para la representación.
+			A continuación se muestran los bocetos utilizados para diseñar la representación:
 		
 			\begin{figure}[H]
 				\centering
@@ -288,22 +296,39 @@
 			\end{figure}
 			
 	\section{Conclusiones}
-
-		\subsection{Conclusiones}
 			
 			\paragraph{}
-			Tras analizar las dos alternativas expuestas se seleccionó la segunda alternativa, concretamente la segunda representación ya que es la que mejor estética tiene de entre las dos.
+			Tras analizar las alternativas propuestas se seleccionará la tercera alternativa, ya que bajo mi punto de vista mejora todos los aspectos de las anteriores.
 			
 			\paragraph{}
 			Se ha escogido esta alternativa frente a la primera porque permite "de un solo vistazo" conocer el flujo de energía de la comunidad autónoma sacrificando la visión directa del tiempo.
 
+			\paragraph{}
+			La representación de grandes cantidades de datos no es una tarea sencilla, ya que depende de muchos factores como el tipo de dato que se quiere mostrar, variables temporales, geográficas, etc. Es una tarea compleja tratar de perder la mínima información posible sin sacrificar el diseño visual y la claridad de la información representada.
+			
+\newpage
 
+	\section{Bibliografía}
 
-		\subsection{Aspectos a Resaltar}
+		\begin{itemize}
+			
+			\item	Diseño y Evaluación de Sistemas Interactivos (ETSII Valladolid): Apuntes de la asignatura
+					
+			\item	Fundamentos de estadística / D. Peña Sánchez de Rivera.
+		
+			\item \href{https://en.wikipedia.org/wiki/Comma-separated_values}{Wikipedia: CSV}
+			
+			\item \href{http://www.convert-me.com/es/convert/energy/toe.html}{Converme: TEP}
+			
+			\item \href{https://community.tableau.com/thread/152115}{Tableu: Sankey Diagram}
 
+			\item \href{http://www.iea.org/Sankey/index.html}{Internationa Energy Agency: Sankey Balance}
 
-		\subsection{Cuestiones no tenidas en cuenta}
+			\item \href{http://bost.ocks.org/mike/map/}{Mike Bostock: Let's make a map}
 
+			\item \href{https://vis4.net/blog/posts/goodbye-redgreen-scales/}{Vis4: Goodbye RedGreen Scales}
+		
+		\end{itemize}
 
 
 \end{document}
