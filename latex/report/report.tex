@@ -28,7 +28,7 @@
 		{\huge\bfseries Análisis y Visualización de Datos MedioAmbientales de Castilla y León\par}
 		\vspace{2cm}
 		{\Large\itshape Sergio García Prado\par}
-	
+
 		\vfill
 		Seguimiento del trabajo en: \par
 		\href{https://github.com/garciparedes/DatosMedioambientalesCYL}{github.com/garciparedes/DatosMedioambientalesCYL}
@@ -51,70 +51,71 @@
 		\subsection{Motivación:}
 
 			\paragraph{}
-			La visualización que se va a realizar consiste en la representación gráfica de datos medioambientales de la Comunidad Autónoma de Castilla y León. El objetivo es descubrir aspectos poco obvios o destacar algo importante del conjunto de datos asignados.
-					
+			La visualización que se va a realizar consiste en la representación gráfica de datos medioambientales de la Comunidad Autónoma de Castilla y León. El objetivo de la práctica es descubrir aspectos poco obvios o destacar algo importante del conjunto de datos asignados.
+
 		\subsection{Objetivos:}
-		
+
 			\paragraph{}
-			La representación gráfica que se va a realizar pretende mostrar el impacto que ha tenido el cierre de la Centrar Nuclear de Santa María de Garoña (Burgos) en el año 2012 y cómo la región solventado ese déficit energético en la actualidad (si es que lo ha hecho). También se pretende analizar si este suceso está correlacionado con el consumo energético en la zona.
-		
+			La representación gráfica que se va a realizar pretende mostrar el impacto que ha tenido el cierre de la Centrar Nuclear de Santa María de Garoña (Burgos) en el año 2012 y representar cómo ha solventado la región ese déficit energético (si es que lo ha hecho). También se pretende analizar si este suceso está ha afectado al consumo energético en la zona.
+
 		\subsection{Estructura:}
 
 	\section{Análisis de los datos}
 
 		\subsection{Descripción}
 			\paragraph{}
-			La Junta de Castilla y León suministra conjuntos de datos referentes a la comunidad autónoma. Para esta práctica se nos han asignado los datos medioambientales. 
+			La Junta de Castilla y León suministra conjuntos de datos referentes a la comunidad autónoma. Para esta práctica se nos han asignado los datos medioambientales.
 
 		\subsection{Adquicisión}
 			\paragraph{}
-			Los datos han sido obtenidos a partir de la iniciativa de Datos Abiertos de la Junta de Castilla y León. 		
+			Los datos han sido obtenidos a partir de la iniciativa de Datos Abiertos de la Junta de Castilla y León.
+
 			\paragraph{}
 			El concepto "datos abiertos" es una filosofía y práctica que persigue que determinados tipos de datos estén disponibles de forma libre para todo el mundo, sin restricciones de derechos de autor, de patentes o de otros mecanismos de control. Tiene una ética similar a otros movimientos y comunidades abiertos, como el software libre, el código abierto y el acceso libre.
-			
+
 			\paragraph{}
 			Los datos han sido obtenidos a partir del siguiente enlace: \href{http://www.datosabiertos.jcyl.es/web/jcyl/set/es/mediciones/indicadoresambientales/1284227444931}{www.datosabiertos.jcyl.es/...}
-			
+
 			\paragraph{}
-			Una vez tenemos los datos procederemos a realizar el análisis de los mismos.
+			Una vez hemos obtenido los datos procederemos a realizar el análisis de los mismos.
 
 		\subsection{Estructura de los datos}
-			
+
 			\paragraph{}
-			Los datos que vamos a manejar se encuentran en fichero CSV, el cual a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de datos contenida en este es elevada (más de 5000 elementos).
-			
+			Los datos que vamos a manejar se encuentran en fichero con formato CSV (un tipo de documento en formato abierto sencillo para representar datos en forma de tabla, en las que las columnas se separan por comas (o punto y coma) y las filas por saltos de línea.), el cual a pesar de tener una estructura eficiente para ser manejado por máquinas, complica la lectura y extracción de información para los humanos. Además la cantidad de información contenida en este grande (más de 5000 elementos).
+
 			\paragraph{}
-			A pesar de estas dificultades si que podemos ver la cabecera del fichero, la cual nos da información de la estructura de los mismo y qué campos nos encontraremos en cada las entradas que contiene:
-	
+			A pesar de estas dificultades, fijándonos en la cabecera del fichero, la cual nos da información de la estructura de los mismo, podemos conocer lo campos nos encontraremos en cada una de las filas que contiene:
+
 			\begin{itemize}
-			
-				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos, hemos obtenido que hay 49 indicadores distintos. Debido a que la cantidad es muy numerosa habrá que tratar de seleccionar los que más se adecuen a lo que queremos mostrar debido a que mostrar demasiada información de manera inadecuada dificulta la visión de lo que se pretende mostrar.
-				
-				\item {\bf Provincia } Provincia a la que está referida el dato. Este campo es de tipo cualitativo nominal. Se refiere a la segmentación territorial de la comunidad autónoma. Como sabemos, Castilla y León está dividida en 9 provincias. Conviene destacar que hay indicadores que no poseen información para todas las provincias, como es el caso del "Tráfico aéreo de pasajeros", que suponemos restringe la información a las provincias que disponen de aeropuerto. Este hecho es algo a tener en cuenta cuando representemos los datos.
 
-				\item {\bf Fecha Validez } Fecha hasta la cual el dato se toma como válido. Representa una variable cuantitativa. La causa es que es una variable temporal. A pesar de ello toma únicamente valores discretos (años) Esto es algo a tener en cuenta cuando elijamos la manera en que lo representaremos.
+				\item {\bf Indicador } Contiene información sobre a lo que se refiere el dato. Representa una variable de tipo cualitativo nominal. Tras realizar una extracción de datos, hemos obtenido que hay 49 indicadores distintos. Debido a que la cantidad es numerosa habrá que tratar de seleccionar los que más se adecuen a lo que queremos mostrar debido a que mostrar demasiada información de manera inadecuada dificulta la visión de lo que se pretende representar.
 
-				\item {\bf Valor } Valor que toma el dato respecto de su unidad.  Representa una variable cuantitativa de tipo continuo. Este campo es el que contiene la "información valiosa" del dato, ya que es la unidad que se utilizará como medida. Se representa en forma de número racional positivo.
+				\item {\bf Provincia } Provincia a la que está referida la información. Este campo es de tipo cualitativo nominal. Se refiere a la segmentación territorial de la comunidad autónoma. Como sabemos, Castilla y León está dividida en 9 provincias. Conviene señalar que hay indicadores que no poseen información para todas las provincias, como es el caso del "Tráfico aéreo de pasajeros", que suponemos que restringe la información a las provincias que disponen de aeropuerto ya que el resto tendrían valor 0 y no tiene sentido indicarlo. Este hecho es algo a tener en cuenta cuando representemos la información.
 
-				\item {\bf Unidad } Este campo nos proporciona la Unidad de Medida del dato, lo cual es algo muy importante a la hora de mostrar información ya que siempre que se suministra información es muy importante señalar tanto la unidad de medida como la escala a la que corresponde la representación.
+				\item {\bf Fecha Validez } Fecha hasta la cual el dato se consideraba como actual. Representa una variable cuantitativa debido a que es una variable temporal. A pesar de ello toma únicamente valores discretos (años). Esto es algo a tener en consideración cuando determinemos la manera en que será representado.
+
+				\item {\bf Valor } Valor que toma el dato respecto de su unidad.  Representa una variable cuantitativa de tipo continuo. Este campo es el que contiene la "información valiosa", ya que es lo que se utilizará como medida para compararla con los demás. Se representa en forma de número racional positivo.
+
+				\item {\bf Unidad } Este campo nos proporciona la unidad de medida del dato, lo cual es algo muy importante a la hora de mostrar información ya que siempre se deben señalar tanto la unidad de medida como la escala a la que corresponde la información representada.
 
 				\item {\bf Frecuencia } Este campo representa la periodicidad con la que se ha obtenido el dato. La mayoría de los datos se han obtenido anualmente, aunque también existen algunos que se han obtenido bianualmente, como es el caso de los "Espacios Naturales".
-			
-			\end{itemize}			
+
+			\end{itemize}
 
 		\subsection{Calidad}
-		
+
 			\paragraph{}
 			A mi juicio la calidad de los datos es buena a pesar de que existen algunos puntos  mejorables.
-	
+
 			\paragraph{}
-			Me llama la atención la columna de "meses" que, entiendo que está ahí porque es necesario que se especifique la unidad de medida de la frecuencia, pero creo que se debería haber indicado en la cabecera del fichero. Además también he encontrado valores atípicos en algunos datos, posiblemente producidos por un error en las mediciones o al transcribirlo al documento.
-			
-		\subsection{Selección de datos y Transformaciones}
-			
+			Me llama la atención la columna de "meses" que, entiendo que está ahí porque es necesario espedificar la unidad de medida de la frecuencia, pero creo que se debería haber indicado en la cabecera del fichero. Además también he encontrado valores atípicos en algunos datos, posiblemente producidos por un error en las mediciones o al transcribirlo al documento.
+
+		\subsection{Selección de datos}
+
 			\paragraph{}
 			Ahora determinaremos los datos que se utilizarán para la visualización. Como se dijo al principio del informe, el objetivo de la visualización será visualizar cómo a repercutido el cierre de la central nuclear en la región. Para ello nos vamos a apoyar en los siguientes indicadores:
-			
+
 			\begin{itemize}
 				\item Producción de energía con carbón
 				\item Producción de energía eólica
@@ -130,83 +131,93 @@
 				\item Consumo doméstico de G.L.P.
 				\item Consumo doméstico de productos petrolíferos
 			\end{itemize}
-			
+
 			\paragraph{}
-			De cada uno de estos indicadores se pretente utilizar los datos de todas las provincias así como fechas. Cabe destacar que fusionaremos los siguientes indicadores para simplificar la visualización:
-			\begin{itemize}
-				\item Producción de energía con carbón
-				\item Producción de energía eólica
-				\item Producción de energía hidráulica
-				\item Producción de energía nuclear
-				\item Producción de energía primaria
-				\item Producción energía solar en Castilla y León
-			\end{itemize}
-			
+			De cada uno de estos indicadores se pretenten utilizar tanto la información de todas las provincias como fechas de validez.
+
+		\subsection{Transformaciones}
+
 			\paragraph{}
-			Fusionaremos estos indicadores en uno nuevo llamado Producción energética cuyo valor será el sumatorio de estos. La unidad de medida de todos ellos es "Toneladas equivalentes de petróleo" por lo cual no habrá que realizar ningún cambio de unidad para poder combinarlos en el nuevo indicador.
-			
-			\begin{itemize}
-				\item Consumo doméstico de electricidad
-				\item Consumo doméstico de gas natural
-				\item Consumo doméstico de G.L.P.
-				\item Consumo doméstico de productos petrolíferos
-			\end{itemize}
-			
+			Para simplificar la visualización realizaremos varias transformaciones en los datos:
+
 			\paragraph{}
-			Fusionaremos estos indicadores en uno nuevo llamado Consumo Doméstico cuyo valor será el sumatorio de estos. En este caso los valores no tienen la misma unidad de medida, por lo que habrá que adaptar cada uno de ellos a la misma para luego crear el nuevo indicador a partir de estos.
-			
+			Fusionaremos estos indicadores en uno nuevo que denominaremos "Producción de energía final" cuyo valor será el sumatorio de todos los métodos de producción (Carbón, Eólica, Hidráulica, Nuclear, Primaria y Solar). La unidad de medida de todos ellos es "Toneladas Equivalentes de Petróleo" por lo cual no habrá que realizar ningún cambio de unidad para poder fusionarlos.
+
+			\paragraph{}
+			 También fusionaremos los indicadores relacionados con el consumo doméstico en uno nuevo que  denominaremos  "Consumo Doméstico" cuyo valor será el sumatorio de estos (Electricidad, Gas Natural, G.L.P. y Productos Petrolíferos). En este caso la información no tiene la misma unidad de medida para todos ellos, por lo que habrá que adaptar cada uno de ellos a la misma (Toneladas Equivalentes de Petróleo) para luego crear el nuevo indicador a partir de estos. El motivo de convertirlos en Toneladas Equivalentes de Petróleo nos servirá para luego compararlos con la producción.
+
 
 	\section{Planificación de la información}
 
-		\subsection{Propósito de la visualización:}
-	
-			\paragraph{}
-			El proyecto de visualización se va a enfocar en el sector energético. Se pretende sacar conclusiones sobre cómo ha afrontado el territorio el cambio hacia nuevos métodos de producción energética con respecto al paso del tiempo, en concreto con el cierre de la central nuclear de Santa María de Garoña (Burgos). 
+		\subsection{Propósito de la visualización}
 
 			\paragraph{}
-			Se pretende relacionar el consumo y la producción energética durante el tiempo dividiendo la información por provincias. Para simplificar la visualización se agregará un mapa de Castilla y Leon el cual represente la diferencia por provincias y así sea sencillo distinguir cuales son las que más cantidad aportan, tanto de producción como de consumo. 
+			El proyecto de visualización se va a enfocar en el sector energético. El objetivo de la visualización es mostrar la relación entre la producción y el consumo energético de la comunidad autónoma. Además de mostrar la proporción tanto de los diferentes métodos de producción como de las formas de consumo y cómo estas han variado durante el tiempo.
 
 			\paragraph{}
-			Para ello la visualización contará con 3 "secciones" referidas a la producción, al consumo y a la relación entre estas dos variables respectivamente. 
-			
+			También se pretende obtener conclusiones acerca de si el déficit producido por el cierre de la central nuclear de Santa María de Garoña (Burgos) en la producción energética de la comunidad autónoma ha sido compensado con el incremento de la producción mediante otros métodos alternativos. También queremos analizar si este déficit a afectado al consumo energético, que se prevee que no ya que probablemente se habrá importado de comunidades colindantes.
+
+		\subsection{Factores que afectan al proyecto}
+
 			\paragraph{}
-			Las visualizaciones de producción y consumo serán similares. Por lo tanto se explicará el gráfico de producción y al de consumo se aplicará la misma idea con sus respectivas variables.  
-	
-			\paragraph{}
-			Se pretende que contenga el mapa citado anteriormente junto con un "Stacked Area Chart" con el que se mostrará la aportación de cada una de las formas la producción respecto del tiempo. Para la producción serán: Producción de energía con carbón, eólica, hidráulica, nuclear, primaria y solar. Con este tipo de gráfico se puede visualizar las variaciones que estas han tenido durante el tiempo, además de la aportación que hace cada una de ellas a la producción total de energía.
-			
-			\paragraph{}
-			Respecto de la visualización de la relación entre producción y consumo hay varios factores a tener en cuenta. 
-			
-
-		\subsection{Factores que afectan al proyecto:}
-		
-
-		\subsection{Enfoque:}
+			El  consumo energético no está únicamente influenciado por la producción energética ya que depende muchos otros factores como la situación económica, el estado atmosférica, la actividad industrial, etc.
 
 
-	\section{Diseño}		
-	
-		\subsection{Forma de representación:}
-		
-	
-		\subsection{Decisiones de presentación:}
+	\section{Diseño}
+
+		\paragraph{}
+		Se proponen varias alternativas para la visualización.
+
+
+		\subsection{Alternativa 1}
+
+			\subsubsection{Introducción}		
+
+				\paragraph{}
+				La visualización que se pretende implementar tiene como objetivo ser un "widget" que se acoplará a una página web para poder visualizar la relación entre producción y consumo, así como el desglose de estas dos variables para conocer la procedencia de cada una de ellas. La estructura de componente será de 3 pestañas (Relación entre Producción y Consumo, Producción y Consumo). Se ha escogido esta estrategia ya que mostrar toda la información a la vez además de ser menos atractiva visualmente, puede dificultar el entendimiento de la información. A continuación procederemos a detallar cada una de las pestañas.
+
+			\subsubsection{Visualización de la relación entre producción y consumo}
+
+				\paragraph{}
+				Esta visualización será la que englobará toda la información. Para ello se utilizarán los indicadores "Consumo de energía final" y "Producción de energía final" (anteriormente hemos descrito cómo obtenerlo). La visualización se basará en dos gráficos:
+				\begin{itemize}
+					\item Map Char
+				\end{itemize}
+
+			\subsubsection{Visualización de producción}
+
+			\subsubsection{Visualización de consumo}
+
+				\paragraph{}
+				Para simplificar la visualización se agregará un mapa de Castilla y Leon el cual represente la diferencia por provincias y así sea sencillo distinguir cuales son las que más cantidad aportan, tanto de producción como de consumo.
+
+				\paragraph{}
+				Para ello la visualización contará con 3 "secciones" referidas a la producción, al consumo y a la relación entre estas dos variables respectivamente.
+
+				\paragraph{}
+				Las visualizaciones de producción y consumo serán similares. Por lo tanto se explicará el gráfico de producción y al de consumo se aplicará la misma idea con sus respectivas variables.
+
+				\paragraph{}
+				Se pretende que contenga el mapa citado anteriormente junto con un "Stacked Area Chart" con el que se mostrará la aportación de cada una de las formas la producción respecto del tiempo. Para la producción serán: Producción de energía con carbón, eólica, hidráulica, nuclear, primaria y solar. Con este tipo de gráfico se puede visualizar las variaciones que estas han tenido durante el tiempo, además de la aportación que hace cada una de ellas a la producción total de energía.
+
+				\paragraph{}
+				Respecto de la visualización de la relación entre producción y consumo hay varios factores a tener en cuenta.
 
 
 	\section{Implementación}
 
 		\subsection{Bocetos:}
 
-	
+
 	\section{Conclusiones}
-	
+
 		\subsection{Conclusiones:}
-	
-	
-		\subsection{Aspectos a Resaltar:}
-	
-	
-		\subsection{Cuestiones no tenidas en cuenta:}
+
+
+		\subsection{Aspectos a Resaltar}
+
+
+		\subsection{Cuestiones no tenidas en cuenta}
 
 
 
