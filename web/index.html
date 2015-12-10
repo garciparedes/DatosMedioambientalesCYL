@@ -8,19 +8,25 @@
         <title>Datos MedioAmbientales CYL.</title>
 
         <meta charset="utf-8">
-        <script src="js/d3.v3.min.js" charset="utf-8"></script>
-        <script src="js/map_cyl.js" charset="utf-8"></script>
+
+        <script src="js/libraries/d3.v3.min.js" charset="utf-8"></script>
+        <script src="js/libraries/sankey.js" charset="utf-8"></script>
+
+        <script src="js/main.js" charset="utf-8"></script>
+        <script src="js/sankeyDiagram.js" charset="utf-8"></script>
+        <script src="js/choroplethMap.js" charset="utf-8"></script>
 
     </head>
 
     <body>
-        <!--
-        <object id="map_cyl" data="components/map_cyl.svg" type="image/svg+xml"></object>
-        -->
+
+        <div id="sankeyDiagram"></div>
+
+        <div id="choroplethMap"></div>
 
 
         <script type="text/javascript" >
-            changeColor();
+            mainJS();
         </script>
     </body>
 

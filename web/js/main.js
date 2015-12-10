@@ -1,0 +1,4 @@
+function mainJS(){
+    generateChoroplethMap();
+    generateSankeyDiagram();
+}
