@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+
+.node rect {
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+}
+
+.link {
+    fill: none;
+    stroke: #024;
+    stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke-opacity: .5;
+}

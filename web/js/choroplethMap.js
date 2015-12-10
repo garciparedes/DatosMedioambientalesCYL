@@ -5,7 +5,6 @@ function generateChoroplethMap(){
 
         document.body.appendChild(xml.documentElement);
 
-
         var elem2 = document.getElementById('leon');
         elem2.style.fill = d3.rgb(31,119,180);
 
@@ -15,5 +14,5 @@ function generateChoroplethMap(){
         var elem3 = document.getElementById('soria');
         elem3.style.fill = d3.rgb(31,119,180);
 
-        });
+    });
 }
