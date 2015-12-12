@@ -13,7 +13,7 @@ function generateChoroplethMap(){
         .append("svg")
         .attr("width", w)
         .attr("height", h)
-        .attr("viewBox", "0 0 "+ w * 2 +" "+ h * 2);
+        .attr("viewBox", "0 0 800 650");
 
 
     //Import the plane
