@@ -1,6 +1,17 @@
 
 function generateChoroplethMap(){
 
+    var provincias = [
+        'leon'
+        , 'palencia'
+        , 'burgos'
+        , 'salamanca'
+        , 'valladolid'
+        , 'soria'
+        , 'zamora'
+        , 'avila'
+        , 'segovia'
+    ];
     var dataset = [ 1];
 
 
@@ -15,24 +26,18 @@ function generateChoroplethMap(){
         .attr("height", h)
         .attr("viewBox", "0 0 800 650");
 
-
+    var color = d3.scale.linear()
+        .domain([-1, 0, 1])
+        .range(["orange", "white", "blue"]);
     //Import the plane
     d3.xml("components/map_cyl.svg", "image/svg+xml", function(xml) {
         var importedNode = document.importNode(xml.documentElement, true);
 
         svg.node().appendChild(importedNode);
 
-        var elem2 = importedNode.getElementById('leon');
-        elem2.style.fill = d3.rgb(31,119,180);
-
-        var elem3 = importedNode.getElementById('valladolid');
-        elem3.style.fill = d3.rgb(31,119,180);
-
-        var elem3 = importedNode.getElementById('soria');
-        elem3.style.fill = d3.rgb(31,119,180);
-
-        var elem3 = importedNode.getElementById('palencia');
-        elem3.style.fill = d3.rgb(31,119,180);
+        for ( i = 0; i < provincias.length; i++){
+            importedNode.getElementById(provincias[i]).style.fill = color(Math.random()*2-1);
+        }
 
     });
 }
