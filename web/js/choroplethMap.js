@@ -5,45 +5,35 @@ function generateChoroplethMap(){
 
 
     //Width and height
-    var w = 1000;
-    var h = 1000;
+    var w = 400;
+    var h = 325;
+
+    //Create SVG Element
+    var svg = d3.select("#choroplethMap")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .attr("viewBox", "0 0 800 1000")
+        .attr("preserveAspectRatio","xMinYMin slice");
 
 
-
-
-    //Import the svgMap
+    //Import the plane
     d3.xml("components/map_cyl.svg", "image/svg+xml", function(xml) {
         var importedNode = document.importNode(xml.documentElement, true);
-        var svgMap = document.getElementById("choroplethMap")
-            .appendChild(importedNode.cloneNode(true));
 
-        svgMap.setAttribute("width", "500px");
-        svgMap.setAttribute("height", "300px");
-        svgMap.setAttribute("style", "background-color red");
-        svgMap.setAttribute("height", "300px");
+        svg.node().appendChild(importedNode);
 
-
-        var elem2 = svgMap.getElementById('leon');
+        var elem2 = importedNode.getElementById('leon');
         elem2.style.fill = d3.rgb(31,119,180);
 
-        var elem3 = svgMap.getElementById('valladolid');
+        var elem3 = importedNode.getElementById('valladolid');
         elem3.style.fill = d3.rgb(31,119,180);
 
-        var elem3 = svgMap.getElementById('soria');
+        var elem3 = importedNode.getElementById('soria');
         elem3.style.fill = d3.rgb(31,119,180);
 
-        /*
-      d3.select(svgMap).select("path").attr("fill", "blue");
-      d3.select(svgMap).select("svg4146").attr("transform", function(d, i){
-          return "translate(" + (i * (w / dataset.length)) + ","
-              + (h - d*4 - (w )) + ")"
-              +"scale("+ 0.5 +")";
-      });
-      */
-
-
+        var elem3 = importedNode.getElementById('palencia');
+        elem3.style.fill = d3.rgb(31,119,180);
 
     });
-
-
 }
