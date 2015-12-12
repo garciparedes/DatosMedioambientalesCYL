@@ -1,4 +1,4 @@
 function mainJS(){
     generateChoroplethMap();
-    generateSankeyDiagram();
+    //generateSankeyDiagram();
 }
