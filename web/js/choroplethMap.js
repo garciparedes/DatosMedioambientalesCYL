@@ -1,17 +1,37 @@
 
 function generateChoroplethMap(){
 
-    d3.xml("components/map_cyl.svg", function(xml) {
+    var dataset = [ 1];
 
-        document.getElementById("choroplethMap").appendChild(xml.documentElement);
 
-        var elem2 = document.getElementById('leon');
+    //Width and height
+    var w = 400;
+    var h = 325;
+
+    //Create SVG Element
+    var svg = d3.select("#choroplethMap")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .attr("viewBox", "0 0 800 650");
+
+
+    //Import the plane
+    d3.xml("components/map_cyl.svg", "image/svg+xml", function(xml) {
+        var importedNode = document.importNode(xml.documentElement, true);
+
+        svg.node().appendChild(importedNode);
+
+        var elem2 = importedNode.getElementById('leon');
         elem2.style.fill = d3.rgb(31,119,180);
 
-        var elem3 = document.getElementById('valladolid');
+        var elem3 = importedNode.getElementById('valladolid');
         elem3.style.fill = d3.rgb(31,119,180);
 
-        var elem3 = document.getElementById('soria');
+        var elem3 = importedNode.getElementById('soria');
+        elem3.style.fill = d3.rgb(31,119,180);
+
+        var elem3 = importedNode.getElementById('palencia');
         elem3.style.fill = d3.rgb(31,119,180);
 
     });

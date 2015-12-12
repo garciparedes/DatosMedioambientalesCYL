@@ -2,6 +2,9 @@ body {
     font-family: sans-serif;
 }
 
+.box {
+}
+
 .node rect {
     fill-opacity: .9;
     shape-rendering: crispEdges;
