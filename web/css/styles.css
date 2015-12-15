@@ -25,11 +25,18 @@ body {
 }
 
 
-.line {
+.blueline {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+
+.orangeline {
+  fill: none;
+  stroke: orange;
+  stroke-width: 1.5px;
+}
+
 .content{
     width: 960px;
     margin:0 auto;

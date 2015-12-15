@@ -17,7 +17,7 @@ function generateLineChart(data, data2){
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .ticks(5)
+        .ticks(3)
         .orient("left");
 
     var line = d3.svg.line()
@@ -61,11 +61,11 @@ function generateLineChart(data, data2){
 
     svg.append("path")
         .datum(data)
-        .attr("class", "line")
+        .attr("class", "blueline")
         .attr("d", line);
 
     svg.append("path")
         .datum(data2)
-        .attr("class", "line")
+        .attr("class", "orangeline")
         .attr("d", line);
 }
