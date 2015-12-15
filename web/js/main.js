@@ -97,10 +97,10 @@ function mainJS(){
         ]
       };
 
-    //generateChoroplethMap(provincias);
+    generateChoroplethMap(provincias);
     changeIndex(provincias[3],-1);
 
-    //generateSankeyDiagram(energias);
+    generateSankeyDiagram(energias);
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
 
     changeLinks(energias);

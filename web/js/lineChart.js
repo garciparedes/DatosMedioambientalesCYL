@@ -1,7 +1,7 @@
 function generateLineChart(data){
     var margin = {top: 20, right: 20, bottom: 30, left: 100},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 460 - margin.left - margin.right,
+        height = 200 - margin.top - margin.bottom;
 
 
     var x = d3.time.scale()
@@ -12,17 +12,19 @@ function generateLineChart(data){
 
     var xAxis = d3.svg.axis()
         .scale(x)
+        .ticks(5)
         .orient("bottom");
 
     var yAxis = d3.svg.axis()
         .scale(y)
+        .ticks(5)
         .orient("left");
 
     var line = d3.svg.line()
         .x(function(d) { return x(d.date); })
         .y(function(d) { return y(d.close); });
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#lineChart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
