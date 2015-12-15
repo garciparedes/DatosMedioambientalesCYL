@@ -41,7 +41,7 @@ function mainJS(){
     ];
 
     var energias = {
-        "nodes": [
+        nodes: [
           {name: "Producción Interna"},
           {name: "Producción Externa"},
           {name: "Energias Renovables"},
@@ -59,20 +59,55 @@ function mainJS(){
           {name: "Electricidad"},
           {name: "Gas Natural"},
           {name: "G.L.P."},
-          {name: "Productos Petrolíferos"}
+          {name: "Productos Petrolíferos"},
+          {name: "Exportación"}
         ],
-        "links": [
-            {"source": 0, "target": 1, "value": 124.729},
-            {"source": 0, "target": 4, "value": 124.729},
-            {"source": 5, "target": 2, "value": 124.729},
-            {"source": 1, "target": 3, "value": 124.729}
+        links: [
+            {source: 0, target: 2, value: 4},
+            {source: 0, target: 3, value: 1},
+
+            {source: 3, target: 4, value: 1},
+            {source: 3, target: 7, value: 1},
+
+            {source: 2, target: 5, value: 1},
+            {source: 2, target: 6, value: 1},
+            {source: 2, target: 8, value: 1},
+            {source: 2, target: 9, value: 1},
+
+
+            {source: 4, target: 10, value: 1},
+            {source: 5, target: 10, value: 1},
+            {source: 6, target: 10, value: 1},
+            {source: 7, target: 10, value: 1},
+            {source: 8, target: 10, value: 1},
+            {source: 9, target: 10, value: 1},
+            {source: 1, target: 10, value: 4},
+
+
+            {source: 10, target: 11, value: 1},
+            {source: 10, target: 12, value: 5},
+            {source: 10, target: 13, value: 4},
+
+            {source: 13, target: 14, value: 1},
+            {source: 13, target: 15, value: 1},
+            {source: 13, target: 16, value: 1},
+            {source: 13, target: 17, value: 1}
 
         ]
       };
 
     //generateChoroplethMap(provincias);
     changeIndex(provincias[3],-1);
+
     generateSankeyDiagram(energias);
+    energias.links[2]=  {source: 0, target: 4, value: 50.729};
+
+    changeLinks(energias);
+}
+
+function changeLinks(energias){
+    energias.links[2]=  {source: 0, target: 4, value: 50.729};
+    console.log(energias)
 }
 
 

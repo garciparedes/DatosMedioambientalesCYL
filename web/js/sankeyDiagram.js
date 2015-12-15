@@ -10,7 +10,7 @@ function generateSankeyDiagram(data){
     };
 
     var width = 960 - margin.left - margin.right;
-    var height = 500 - margin.top - margin.bottom;
+    var height = 420 - margin.top - margin.bottom;
 
     var color = d3.scale.category20();
 
@@ -29,7 +29,7 @@ function generateSankeyDiagram(data){
     // Set up Sankey object.
     var sankey = d3.sankey()
         .nodeWidth(30)
-        .nodePadding(10)
+        .nodePadding(30)
         .size([width, height])
         .nodes(data.nodes)
         .links(data.links)
