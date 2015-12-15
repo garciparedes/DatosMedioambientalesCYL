@@ -44,22 +44,22 @@ function mainJS(){
         nodes: [
           {name: "Producción Interna"},
           {name: "Producción Externa"},
-          {name: "Energias Renovables"},
-          {name: "Energias No Renovables"},
+          {name: "Renovables"},
+          {name: "No Renovables"},
           {name: "Carbón"},
           {name: "Eólica"},
           {name: "Hidráulica"},
           {name: "Nuclear"},
           {name: "Primaria"},
           {name: "Solar"},
-          {name: "Consumo Final"},
+          {name: "Consumo"},
           {name: "Transporte"},
           {name: "Industrial"},
           {name: "Doméstico"},
           {name: "Electricidad"},
           {name: "Gas Natural"},
           {name: "G.L.P."},
-          {name: "Productos Petrolíferos"},
+          {name: "Petróleo"},
           {name: "Exportación"}
         ],
         links: [
@@ -81,12 +81,13 @@ function mainJS(){
             {source: 7, target: 10, value: 1},
             {source: 8, target: 10, value: 1},
             {source: 9, target: 10, value: 1},
-            {source: 1, target: 10, value: 4},
+            {source: 1, target: 10, value: 1},
 
 
             {source: 10, target: 11, value: 1},
-            {source: 10, target: 12, value: 5},
+            {source: 10, target: 12, value: 1},
             {source: 10, target: 13, value: 4},
+            {source: 10, target: 18, value: 1},
 
             {source: 13, target: 14, value: 1},
             {source: 13, target: 15, value: 1},
@@ -107,7 +108,6 @@ function mainJS(){
 
 function changeLinks(energias){
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
-    console.log(energias)
 }
 
 

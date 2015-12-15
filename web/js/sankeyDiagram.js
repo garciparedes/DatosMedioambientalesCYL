@@ -28,8 +28,8 @@ function generateSankeyDiagram(data){
 
     // Set up Sankey object.
     var sankey = d3.sankey()
-        .nodeWidth(30)
-        .nodePadding(30)
+        .nodeWidth(100)
+        .nodePadding(50)
         .size([width, height])
         .nodes(data.nodes)
         .links(data.links)
@@ -108,6 +108,7 @@ function generateSankeyDiagram(data){
             },
             dy: ".35em",
             "text-anchor": "middle",
+            "font-size": 10,
             transform: null
         })
         .text(function (d) {
