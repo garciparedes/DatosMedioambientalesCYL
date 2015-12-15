@@ -55,9 +55,11 @@ function generateLineChart(data, data2){
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
+        .attr("font-size", 10)
+
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Price ($)");
+        .text("TEP");
 
     svg.append("path")
         .datum(data)
