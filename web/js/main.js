@@ -39,6 +39,8 @@ var provincias =
 ];
 function mainJS(){
 
+    var fileName ="data/indicadores_medioambientales.csv";
+
 
 
     var energias = {
@@ -215,6 +217,8 @@ function mainJS(){
                 value: 232
             }
         ];
+
+    extract(fileName);
 
     generateChoroplethMap(provincias);
     generateLineChart(production, consumption, 2013);
