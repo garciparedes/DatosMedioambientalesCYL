@@ -26,11 +26,11 @@ body {
 .grid .tick {
             stroke: lightgrey;
             opacity: 0.7;
-        }
+}
 
-        .grid path {
-            display: node;
-        }
+.grid path {
+    display: node;
+}
 
 .blueline {
   fill: none;

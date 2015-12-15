@@ -15,7 +15,7 @@ function generateLineChart(blueData, orangeData){
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = 960/2 - margin.left - margin.right,
-        height = 150 - margin.top - margin.bottom;
+        height = 200 - margin.top - margin.bottom;
 
 
     var x = d3.scale.linear()
@@ -53,9 +53,9 @@ function generateLineChart(blueData, orangeData){
     d3.select("#lineChart")
         .on("click", function(d){
             var x = d3.mouse(this)[0]-margin.left;
+            updateTimeLine(x)
             changeDate(Math.round((maxDate-minDate)*(x/width)+minDate));
         });
-
 
     var svg = d3.select("#lineChart")
         .append("svg")
@@ -96,4 +96,17 @@ function generateLineChart(blueData, orangeData){
         .datum(orangeData)
         .attr("class", "orangeline")
         .attr("d", line);
+
+    var timeLine = svg.append("line")
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", 0)
+        .attr("y2", height)
+        .attr("stroke", "black");
+
+    function updateTimeLine(pos){
+        timeLine
+        .attr("x1", pos)
+        .attr("x2", pos);
+    }
 }
