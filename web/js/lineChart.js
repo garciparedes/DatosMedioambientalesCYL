@@ -1,7 +1,7 @@
 function generateLineChart(data){
     var margin = {top: 20, right: 20, bottom: 30, left: 100},
-        width = 460 - margin.left - margin.right,
-        height = 200 - margin.top - margin.bottom;
+        width = 960/2 - margin.left - margin.right,
+        height = 150 - margin.top - margin.bottom;
 
 
     var x = d3.time.scale()

@@ -12,7 +12,7 @@ function generateChoroplethMap(provincias){
 
     //Width and height
     var w = 400;
-    var h = 325;
+    var h = 270;
 
 
     //Create SVG Element
