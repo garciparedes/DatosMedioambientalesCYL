@@ -1,44 +1,45 @@
+var provincias =
+    [
+        {
+            Name: 'leon',
+            Index: 0.2
+        },
+        {
+            Name: 'palencia',
+            Index: -0.5
+        },
+        {
+            Name: 'burgos',
+            Index: 0.2
+        },
+        {
+            Name: 'salamanca',
+            Index: 0.5
+        },
+        {
+            Name: 'valladolid',
+            Index: 0.2
+        },
+        {
+            Name: 'zamora',
+            Index: 0.2
+        },
+        {
+            Name: 'avila',
+            Index: 0.7
+        },
+        {
+            Name: 'segovia',
+            Index: -0.2
+        },
+        {
+            Name: 'soria',
+            Index: 0.2
+        }
+];
 function mainJS(){
 
-    var provincias =
-        [
-            {
-                Name: 'leon',
-                Index: 0.2
-            },
-            {
-                Name: 'palencia',
-                Index: -1
-            },
-            {
-                Name: 'burgos',
-                Index: 0.2
-            },
-            {
-                Name: 'salamanca',
-                Index: 0.5
-            },
-            {
-                Name: 'valladolid',
-                Index: 0.2
-            },
-            {
-                Name: 'zamora',
-                Index: 0.2
-            },
-            {
-                Name: 'avila',
-                Index: 0.7
-            },
-            {
-                Name: 'segovia',
-                Index: -0.2
-            },
-            {
-                Name: 'soria',
-                Index: 0.2
-            }
-    ];
+
 
     var energias = {
         nodes: [
@@ -97,13 +98,132 @@ function mainJS(){
         ]
       };
 
-    //generateChoroplethMap(provincias);
-    changeIndex(provincias[3],-1);
+    var production = [
+          {
+              date: 2001,
+              value: 3256
+          },
+          {
+              date: 2002,
+              value: 3423
+          },
+          {
+              date: 2003,
+              value: 243
+          },
+          {
+              date: 2004,
+              value: 524
+          },
+          {
+              date: 2005,
+              value: 653
+          },
+          {
+              date: 2006,
+              value: 235
+          },
+          {
+              date: 2007,
+              value: 764
+          },
+          {
+              date: 2008,
+              value: 74
+          },
+          {
+              date: 2009,
+              value: 536
+          },
+          {
+              date: 2010,
+              value: 311
+          },
+          {
+              date: 2011,
+              value: 14
+          },
+          {
+              date: 2012,
+              value: 134
+          },
+          {
+              date: 2013,
+              value: 432
+          },
+          {
+              date: 2014,
+              value: 343
+          }
+    ];
 
+    var consumption = [
+            {
+                date: 2001,
+                value: 8564
+            },
+            {
+                date: 2002,
+                value: 323
+            },
+            {
+                date: 2003,
+                value: 143
+            },
+            {
+                date: 2004,
+                value: 224
+            },
+            {
+                date: 2005,
+                value: 353
+            },
+            {
+                date: 2006,
+                value: 535
+            },
+            {
+                date: 2007,
+                value: 164
+            },
+            {
+                date: 2008,
+                value: 974
+            },
+            {
+                date: 2009,
+                value: 836
+            },
+            {
+                date: 2010,
+                value: 211
+            },
+            {
+                date: 2011,
+                value: 514
+            },
+            {
+                date: 2012,
+                value: 434
+            },
+            {
+                date: 2013,
+                value: 242
+            },
+            {
+                date: 2014,
+                value: 232
+            }
+        ];
+
+    generateChoroplethMap(provincias);
+    generateLineChart(production, consumption, 2013);
     generateSankeyDiagram(energias);
-    energias.links[2]=  {source: 0, target: 4, value: 50.729};
+
 
     changeLinks(energias);
+
+
 }
 
 function changeLinks(energias){
@@ -111,12 +231,16 @@ function changeLinks(energias){
 }
 
 
-function changeIndex(provincia, index){
-    provincia.Index = Math.random()*2-1;
+function changeProvinceIndex(province, index){
+    province.Index = index;
 }
 
 
-function update(provincia){
-    changeIndex(provincia);
-    updateMapColorProvince(provincia);
+function changeProvince(province){
+    console.log(province);
+}
+
+function changeDate(date){
+
+    console.log(date);
 }

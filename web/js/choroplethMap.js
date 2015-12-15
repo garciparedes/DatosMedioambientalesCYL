@@ -12,7 +12,7 @@ function generateChoroplethMap(provincias){
 
     //Width and height
     var w = 400;
-    var h = 325;
+    var h = 270;
 
 
     //Create SVG Element
@@ -26,7 +26,6 @@ function generateChoroplethMap(provincias){
     d3.xml("components/map_cyl.svg", "image/svg+xml", function(xml) {
         var importedNode = document.importNode(xml.documentElement, true);
         svg.node().appendChild(importedNode);
-
         for ( i = 0; i < provincias.length; i++){
             setAttr(provincias[i]);
         }
@@ -43,7 +42,7 @@ function setAttr(provincia){
 function setOnClick(provincia){
     d3.select("#" + provincia.Name)
         .on("click",function(){
-            update(provincia);
+            changeProvince(provincia);
     });
 }
 
