@@ -1,5 +1,4 @@
-function generateLineChart(blueData, orangeData){
-
+function generateLineChart(blueData, orangeData, date){
     blueData.forEach(function(d) {
         d.date = d.date,1,1;
         d.value = +d.value;
@@ -106,9 +105,17 @@ function generateLineChart(blueData, orangeData){
         .attr("y2", height)
         .attr("stroke", "black");
 
+
     function updateTimeLine(pos){
         timeLine
-        .attr("x1", pos)
-        .attr("x2", pos);
+            .attr("x1", pos)
+            .attr("x2", pos);
     }
+
+    function updateTimeLineFromDate(date){
+        updateTimeLine(width*(date-minDate)/(maxDate-minDate));
+    }
+
+    updateTimeLineFromDate(date);
+
 }

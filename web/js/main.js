@@ -97,7 +97,7 @@ function mainJS(){
         ]
       };
 
-    var data = [
+    var production = [
           {
               date: 2001,
               value: 3256
@@ -156,7 +156,7 @@ function mainJS(){
           }
     ];
 
-    var data2 = [
+    var consumption = [
             {
                 date: 2001,
                 value: 8564
@@ -216,7 +216,7 @@ function mainJS(){
         ];
 
     generateChoroplethMap(provincias);
-    generateLineChart(data, data2);
+    generateLineChart(production, consumption, 2011);
     generateSankeyDiagram(energias);
 
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
