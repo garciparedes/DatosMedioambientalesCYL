@@ -97,67 +97,126 @@ function mainJS(){
         ]
       };
 
-    var data = [
+    var production = [
           {
               date: 2001,
-              close: 3256
+              value: 3256
           },
           {
               date: 2002,
-              close: 3423
+              value: 3423
           },
           {
               date: 2003,
-              close: 243
+              value: 243
           },
           {
               date: 2004,
-              close: 524
+              value: 524
           },
           {
               date: 2005,
-              close: 653
+              value: 653
           },
           {
               date: 2006,
-              close: 235
+              value: 235
           },
           {
               date: 2007,
-              close: 764
+              value: 764
           },
           {
               date: 2008,
-              close: 74
+              value: 74
           },
           {
               date: 2009,
-              close: 536
+              value: 536
           },
           {
               date: 2010,
-              close: 311
+              value: 311
           },
           {
               date: 2011,
-              close: 14
+              value: 14
           },
           {
               date: 2012,
-              close: 134
+              value: 134
           },
           {
               date: 2013,
-              close: 432
+              value: 432
           },
           {
               date: 2014,
-              close: 343
+              value: 343
           }
-      ];
+    ];
+
+    var consumption = [
+            {
+                date: 2001,
+                value: 8564
+            },
+            {
+                date: 2002,
+                value: 323
+            },
+            {
+                date: 2003,
+                value: 143
+            },
+            {
+                date: 2004,
+                value: 224
+            },
+            {
+                date: 2005,
+                value: 353
+            },
+            {
+                date: 2006,
+                value: 535
+            },
+            {
+                date: 2007,
+                value: 164
+            },
+            {
+                date: 2008,
+                value: 974
+            },
+            {
+                date: 2009,
+                value: 836
+            },
+            {
+                date: 2010,
+                value: 211
+            },
+            {
+                date: 2011,
+                value: 514
+            },
+            {
+                date: 2012,
+                value: 434
+            },
+            {
+                date: 2013,
+                value: 242
+            },
+            {
+                date: 2014,
+                value: 232
+            }
+        ];
 
     generateChoroplethMap(provincias);
-    generateLineChart(data);
+    generateLineChart(production, consumption, 2011);
     generateSankeyDiagram(energias);
 
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
@@ -175,6 +234,10 @@ function changeLinks(energias){
 
 function changeIndex(provincia, index){
     provincia.Index = Math.random()*2-1;
+}
+
+function changeDate(date){
+    console.log(date);
 }
 
 
