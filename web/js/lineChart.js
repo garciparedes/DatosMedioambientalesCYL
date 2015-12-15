@@ -53,8 +53,10 @@ function generateLineChart(blueData, orangeData){
     d3.select("#lineChart")
         .on("click", function(d){
             var x = d3.mouse(this)[0]-margin.left;
-            updateTimeLine(x)
-            changeDate(Math.round((maxDate-minDate)*(x/width)+minDate));
+            if (x >= 0 && x <= width ){
+                updateTimeLine(x)
+                changeDate(Math.round((maxDate-minDate)*(x/width)+minDate));
+            }
         });
 
     var svg = d3.select("#lineChart")
