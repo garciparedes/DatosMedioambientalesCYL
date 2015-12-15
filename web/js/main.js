@@ -100,118 +100,118 @@ function mainJS(){
     var data = [
           {
               date: 2001,
-              close: 3256
+              value: 3256
           },
           {
               date: 2002,
-              close: 3423
+              value: 3423
           },
           {
               date: 2003,
-              close: 243
+              value: 243
           },
           {
               date: 2004,
-              close: 524
+              value: 524
           },
           {
               date: 2005,
-              close: 653
+              value: 653
           },
           {
               date: 2006,
-              close: 235
+              value: 235
           },
           {
               date: 2007,
-              close: 764
+              value: 764
           },
           {
               date: 2008,
-              close: 74
+              value: 74
           },
           {
               date: 2009,
-              close: 536
+              value: 536
           },
           {
               date: 2010,
-              close: 311
+              value: 311
           },
           {
               date: 2011,
-              close: 14
+              value: 14
           },
           {
               date: 2012,
-              close: 134
+              value: 134
           },
           {
               date: 2013,
-              close: 432
+              value: 432
           },
           {
               date: 2014,
-              close: 343
+              value: 343
           }
     ];
 
     var data2 = [
             {
                 date: 2001,
-                close: 856
+                value: 8564
             },
             {
                 date: 2002,
-                close: 323
+                value: 323
             },
             {
                 date: 2003,
-                close: 143
+                value: 143
             },
             {
                 date: 2004,
-                close: 224
+                value: 224
             },
             {
                 date: 2005,
-                close: 353
+                value: 353
             },
             {
                 date: 2006,
-                close: 535
+                value: 535
             },
             {
                 date: 2007,
-                close: 164
+                value: 164
             },
             {
                 date: 2008,
-                close: 974
+                value: 974
             },
             {
                 date: 2009,
-                close: 836
+                value: 836
             },
             {
                 date: 2010,
-                close: 211
+                value: 211
             },
             {
                 date: 2011,
-                close: 514
+                value: 514
             },
             {
                 date: 2012,
-                close: 434
+                value: 434
             },
             {
                 date: 2013,
-                close: 242
+                value: 242
             },
             {
                 date: 2014,
-                close: 232
+                value: 232
             }
         ];
 
@@ -234,6 +234,10 @@ function changeLinks(energias){
 
 function changeIndex(provincia, index){
     provincia.Index = Math.random()*2-1;
+}
+
+function changeDate(date){
+    console.log(date);
 }
 
 
