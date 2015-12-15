@@ -1,4 +1,4 @@
-function generateLineChart(data){
+function generateLineChart(data, data2){
     var margin = {top: 20, right: 20, bottom: 30, left: 100},
         width = 960/2 - margin.left - margin.right,
         height = 150 - margin.top - margin.bottom;
@@ -36,6 +36,11 @@ function generateLineChart(data){
         d.close = +d.close;
     });
 
+    data2.forEach(function(d) {
+        d.date = new Date(d.date,1,1);
+        d.close = +d.close;
+    });
+
     x.domain(d3.extent(data, function(d) { return d.date; }));
     y.domain([0, d3.max(data, function(d){ return d.close; })]);
 
@@ -59,4 +64,8 @@ function generateLineChart(data){
         .attr("class", "line")
         .attr("d", line);
 
+    svg.append("path")
+        .datum(data2)
+        .attr("class", "line")
+        .attr("d", line);
 }

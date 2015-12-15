@@ -154,10 +154,69 @@ function mainJS(){
               date: 2014,
               close: 343
           }
-      ];
+    ];
+
+    var data2 = [
+            {
+                date: 2001,
+                close: 856
+            },
+            {
+                date: 2002,
+                close: 323
+            },
+            {
+                date: 2003,
+                close: 143
+            },
+            {
+                date: 2004,
+                close: 224
+            },
+            {
+                date: 2005,
+                close: 353
+            },
+            {
+                date: 2006,
+                close: 535
+            },
+            {
+                date: 2007,
+                close: 164
+            },
+            {
+                date: 2008,
+                close: 974
+            },
+            {
+                date: 2009,
+                close: 836
+            },
+            {
+                date: 2010,
+                close: 211
+            },
+            {
+                date: 2011,
+                close: 514
+            },
+            {
+                date: 2012,
+                close: 434
+            },
+            {
+                date: 2013,
+                close: 242
+            },
+            {
+                date: 2014,
+                close: 232
+            }
+        ];
 
     generateChoroplethMap(provincias);
-    generateLineChart(data);
+    generateLineChart(data, data2);
     generateSankeyDiagram(energias);
 
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
