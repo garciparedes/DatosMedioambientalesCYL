@@ -64,7 +64,7 @@ function mainJS(){
         ],
         links: [
             {source: 0, target: 2, value: 4},
-            {source: 0, target: 3, value: 1},
+            {source: 0, target: 3, value: 2},
 
             {source: 3, target: 4, value: 1},
             {source: 3, target: 7, value: 1},
