@@ -6,7 +6,7 @@ var provincias =
         },
         {
             Name: 'palencia',
-            Index: -1
+            Index: -0.5
         },
         {
             Name: 'burgos',
@@ -217,13 +217,11 @@ function mainJS(){
         ];
 
     generateChoroplethMap(provincias);
-    generateLineChart(production, consumption, 2011);
+    generateLineChart(production, consumption, 2013);
     generateSankeyDiagram(energias);
 
-    energias.links[2]=  {source: 0, target: 4, value: 50.729};
 
     changeLinks(energias);
-    provincias[7].Index = -1;
 
 
 }
@@ -234,19 +232,15 @@ function changeLinks(energias){
 
 
 function changeProvinceIndex(province, index){
-    province.Index = Math.random()*2-1;
+    province.Index = index;
 }
 
 
 function changeProvince(province){
-    changeProvinceIndex(province, 0);
-    updateMapColorProvince(province);
+    console.log(province);
 }
 
 function changeDate(date){
-    for (i =0; i < provincias.length; i++){
-        updateMapColorProvince(provincias[i]);
-    }
 
     console.log(date);
 }
