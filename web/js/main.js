@@ -40,9 +40,39 @@ function mainJS(){
             }
     ];
 
-    generateChoroplethMap(provincias);
+    var energias = {
+        "nodes": [
+          {name: "Producción Interna"},
+          {name: "Producción Externa"},
+          {name: "Energias Renovables"},
+          {name: "Energias No Renovables"},
+          {name: "Carbón"},
+          {name: "Eólica"},
+          {name: "Hidráulica"},
+          {name: "Nuclear"},
+          {name: "Primaria"},
+          {name: "Solar"},
+          {name: "Consumo Final"},
+          {name: "Transporte"},
+          {name: "Industrial"},
+          {name: "Doméstico"},
+          {name: "Electricidad"},
+          {name: "Gas Natural"},
+          {name: "G.L.P."},
+          {name: "Productos Petrolíferos"}
+        ],
+        "links": [
+            {"source": 0, "target": 1, "value": 124.729},
+            {"source": 0, "target": 4, "value": 124.729},
+            {"source": 5, "target": 2, "value": 124.729},
+            {"source": 1, "target": 3, "value": 124.729}
+
+        ]
+      };
+
+    //generateChoroplethMap(provincias);
     changeIndex(provincias[3],-1);
-    //generateSankeyDiagram();
+    generateSankeyDiagram(energias);
 }
 
 
