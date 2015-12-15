@@ -28,7 +28,8 @@ function generateLineChart(blueData, orangeData){
     var xAxis = d3.svg.axis()
         .scale(x)
         .ticks(5)
-        .orient("bottom");
+        .orient("bottom")
+        .tickFormat(d3.format("g"));
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -36,7 +37,6 @@ function generateLineChart(blueData, orangeData){
         .orient("left")
         .tickFormat(d3.format("s"));
 
-        //TODO
 
     var yGrid = d3.svg.axis()
         .scale(y)
