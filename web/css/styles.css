@@ -2,9 +2,6 @@ body {
     font-family: sans-serif;
 }
 
-.box {
-}
-
 .node rect {
     fill-opacity: .9;
     shape-rendering: crispEdges;
@@ -28,9 +25,20 @@ body {
 }
 
 
-
 .line {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+.content{
+    width: 960px;
+    margin:0 auto;
+}
+#lineChart {
+    display: table-cell;
+}
+
+#choroplethMap {
+    float: right;
+    display: table-cell;
 }

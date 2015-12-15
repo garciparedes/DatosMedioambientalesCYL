@@ -97,73 +97,74 @@ function mainJS(){
         ]
       };
 
-    generateChoroplethMap(provincias);
-    changeIndex(provincias[3],-1);
+    var data = [
+          {
+              date: 2001,
+              close: 3256
+          },
+          {
+              date: 2002,
+              close: 3423
+          },
+          {
+              date: 2003,
+              close: 243
+          },
+          {
+              date: 2004,
+              close: 524
+          },
+          {
+              date: 2005,
+              close: 653
+          },
+          {
+              date: 2006,
+              close: 235
+          },
+          {
+              date: 2007,
+              close: 764
+          },
+          {
+              date: 2008,
+              close: 74
+          },
+          {
+              date: 2009,
+              close: 536
+          },
+          {
+              date: 2010,
+              close: 311
+          },
+          {
+              date: 2011,
+              close: 14
+          },
+          {
+              date: 2012,
+              close: 134
+          },
+          {
+              date: 2013,
+              close: 432
+          },
+          {
+              date: 2014,
+              close: 343
+          }
+      ];
 
+    generateChoroplethMap(provincias);
+    generateLineChart(data);
     generateSankeyDiagram(energias);
+
     energias.links[2]=  {source: 0, target: 4, value: 50.729};
 
     changeLinks(energias);
 
-    var data = [
-        {
-            date: 2001,
-            close: 3256
-        },
-        {
-            date: 2002,
-            close: 3423
-        },
-        {
-            date: 2003,
-            close: 243
-        },
-        {
-            date: 2004,
-            close: 524
-        },
-        {
-            date: 2005,
-            close: 653
-        },
-        {
-            date: 2006,
-            close: 235
-        },
-        {
-            date: 2007,
-            close: 764
-        },
-        {
-            date: 2008,
-            close: 74
-        },
-        {
-            date: 2009,
-            close: 536
-        },
-        {
-            date: 2010,
-            close: 311
-        },
-        {
-            date: 2011,
-            close: 14
-        },
-        {
-            date: 2012,
-            close: 134
-        },
-        {
-            date: 2013,
-            close: 432
-        },
-        {
-            date: 2014,
-            close: 343
-        }
-    ];
-    generateLineChart(data);
+
 
 }
 
