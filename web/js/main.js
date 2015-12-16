@@ -25,9 +25,14 @@ function mainWithData(data){
     console.log(data.length);
     console.log(data);
 
-    console.log(getYearDataAllProvinces(data, indicadoresProduccion));
+    //console.log(getAllYearOneProvinceData(data, "Valladolid", indicadoresProduccion));
+    console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
+    console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
+    console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
 
+    console.log(getOneYearAllProvinceData(data, 2010));
 
+    console.log(etOneYearOneProvinceData(data, 2010, "Palencia"));
 
     var provincias =
         [
@@ -129,8 +134,8 @@ function mainWithData(data){
     generateChoroplethMap(provincias);
 
     generateLineChart(
-        getYearDataAllProvinces(data, indicadoresProduccion),
-        getYearDataAllProvinces(data, ["Consumo de energía final"]),
+        getAllYearAllProvinceData(data, indicadoresProduccion),
+        getAllYearAllProvinceData(data, ["Consumo de energía final"]),
         2010
     );
     generateSankeyDiagram(energias);

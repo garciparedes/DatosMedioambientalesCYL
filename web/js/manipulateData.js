@@ -60,6 +60,20 @@ function isCorrectDate( fechaValidez) {
     }
 }
 
+function isCorrectIndicator( indicador) {
+    return function(value) {
+        return (value.Indicador == indicador);
+    }
+}
+
+
+function isCorrectProvince( province) {
+    return function(value) {
+        return (value.Provincia == province);
+    }
+}
+
+
 function sameUnitIndicators(d, habitantes){
     var unit = String(d["Unidad"]);
 
@@ -192,11 +206,47 @@ function generateProductionSum(data, indicators, id){
 }
 
 
-function getYearDataOneProvince(data, province){
+function getOneYearAllProvinceData(data, date){
+    var sum = new Array();
+    data = data.filter(isCorrectDate(date));
+    data.forEach(function(d) {
+        if ((dat = sum.filter(isCorrectIndicator( d.Indicador))[0]) == undefined){
+            sum.push(
+                {
+                    Indicador: d.Indicador,
+                    Valor: d.Valor
+                }
+            );
 
+        } else {
+            dat.Valor += d.Valor;
+        }
+    });
+    return sum;
 }
 
-function getYearDataAllProvinces(data, indicators){
+function getOneYearOneProvinceData(data, date, province){
+    var sum = new Array();
+    data = data.filter(isCorrectDate(date));
+    data = data.filter(isCorrectProvince(province));
+
+    data.forEach(function(d) {
+        if ((dat = sum.filter(isCorrectIndicator( d.Indicador))[0]) == undefined){
+            sum.push(
+                {
+                    Indicador: d.Indicador,
+                    Valor: d.Valor
+                }
+            );
+
+        } else {
+            dat.Valor += d.Valor;
+        }
+    });
+    return sum;
+}
+
+function getAllYearAllProvinceData(data, indicators){
     var sum = new Array();
     data.forEach(function(d) {
         if(contains(indicators, String(d.Indicador))){
@@ -216,6 +266,56 @@ function getYearDataAllProvinces(data, indicators){
         }
     });
     return sum;
+}
+
+function getAllYearOneProvinceData(data, province, indicators){
+    var sum = new Array();
+    data.forEach(function(d) {
+        if ((contains(indicators, String(d.Indicador))) && ( province == d.Provincia)) {
+            if ((dat = sum.filter(isCorrectDate( d.FechaValidez))[0]) == undefined){
+                sum.push(
+                    {
+                        FechaValidez: d.FechaValidez,
+                        Valor: d.Valor
+                    }
+                );
+
+            } else {
+                dat.Valor += d.Valor;
+            }
+        }
+    });
+    return sum;
+}
+
+function getAllYearAllProvinceDataRatio(data, province, indicators1, indicators2){
+    var sum = new Array();
+    var data1 = getAllYearOneProvinceData(data, province, indicators1).sort(compareDate);
+    var data2 = getAllYearOneProvinceData(data, province, indicators2).sort(compareDate);
+
+    for( i = 0; i < data1.length && i < data2.length; i++){
+        sum.push(
+            {
+                Provincia: province,
+                Ratio: (data1[i].Valor / data2[i].Valor)-1
+            }
+        );
+    }
+
+    return sum;
+}
+
+/**
+ * http://stackoverflow.com/a/1129270/3921457
+ * @param {object} obj Object to find.
+ * @param {object} obj Object to find.
+ */
+function compareDate(a,b) {
+    if (a.FechaValidez < b.FechaValidez)
+        return -1;
+    if (a.FechaValidez > b.FechaValidez)
+        return 1;
+    return 0;
 }
 
 /**
