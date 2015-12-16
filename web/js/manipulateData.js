@@ -15,7 +15,6 @@ function extract( indicatorList){
         var formatedData = new Array();
 
         var habitantes = data.filter(isHabitantes);
-        console.log(habitantes)
 
         data.forEach(function(d) {
             if(contains(indicatorList,String(d["Indicador"]))){
@@ -24,19 +23,18 @@ function extract( indicatorList){
                     (String(d["Unidad"]) != "Toneladas equivalentes de petróleo")) {
                     formatedData.push( sameUnitIndicators(d, habitantes));
                 } else {
-
                     formatedData.push({
                         Indicador: String(d["Indicador"]),
                         Provincia: String(d["Provincia"]),
                         FechaValidez: Number(d["Fecha validez"]),
-                        Valor: Number(d["Valor"].replace('.',''))/*,
+                        Valor: Number(d["Valor"].replace(/\./g,''))/*,
                         Unidad: String(d["Unidad"].toUpperCase()),
                         Frecuencia: Number(d["Frecuencia"])*/
                     });
                 }
             }
         });
-        mainWithData(formatedData);
+        addNewIndicators(formatedData);
     });
 }
 
@@ -50,7 +48,11 @@ function isCorrect(provincia, fechaValidez) {
     }
 }
 
-
+function isCorrect2(provincia, fechaValidez) {
+  return function(value) {
+        return ( (value.Provincia == provincia) && (value.FechaValidez == fechaValidez)) ;
+    }
+}
 function sameUnitIndicators(d, habitantes){
     var unit = String(d["Unidad"]);
 
@@ -59,7 +61,7 @@ function sameUnitIndicators(d, habitantes){
             Indicador: String(d["Indicador"]),
             Provincia: String(d["Provincia"]),
             FechaValidez: Number(d["Fecha validez"]),
-            Valor: Number(d["Valor"].replace('.','') * 0.1102)/*,
+            Valor: Number(d["Valor"].replace(/\./g,'') * 0.1102)/*,
             Unidad: "TEP"),
             Frecuencia: Number(d["Frecuencia"])*/
         };
@@ -69,13 +71,13 @@ function sameUnitIndicators(d, habitantes){
             Indicador: String(d["Indicador"]),
             Provincia: String(d["Provincia"]),
             FechaValidez: Number(d["Fecha validez"]),
-            Valor: Number(d["Valor"].replace('.','') * 0.00008598)/*,
+            Valor: Number(d["Valor"].replace(/\./g,'') * 0.00008598)/*,
             Unidad: "TEP"),
             Frecuencia: Number(d["Frecuencia"])*/
         };
     } else{
         var nHab = Number(habitantes.filter(
-            isCorrect(d["Provincia"], d["Fecha validez"]))[0]["Valor"].replace('.','')
+            isCorrect(d["Provincia"], d["Fecha validez"]))[0]["Valor"].replace(/\./g,'')
         );
 
         if (unit == "Megavatios-hora por habitante"){
@@ -84,7 +86,7 @@ function sameUnitIndicators(d, habitantes){
                 Indicador: String(d["Indicador"]),
                 Provincia: String(d["Provincia"]),
                 FechaValidez: Number(d["Fecha validez"]),
-                Valor: Number(d["Valor"].replace('.','') * 0.00008598 * 1000 * nHab)/*,
+                Valor: Number(d["Valor"].replace(/\./g,'') * 0.00008598 * 1000 * nHab)/*,
                 Unidad: "TEP"),
                 Frecuencia: Number(d["Frecuencia"])*/
             };
@@ -94,7 +96,7 @@ function sameUnitIndicators(d, habitantes){
                 Indicador: String(d["Indicador"]),
                 Provincia: String(d["Provincia"]),
                 FechaValidez: Number(d["Fecha validez"]),
-                Valor: Number(d["Valor"].replace('.','') * 0.00252 * nHab)/*,
+                Valor: Number(d["Valor"].replace(/\./g,'') * 0.00252 * nHab)/*,
                 Unidad: "TEP"),
                 Frecuencia: Number(d["Frecuencia"])*/
             };
@@ -103,7 +105,7 @@ function sameUnitIndicators(d, habitantes){
                 Indicador: String(d["Indicador"]),
                 Provincia: String(d["Provincia"]),
                 FechaValidez: Number(d["Fecha validez"]),
-                Valor: Number(d["Valor"].replace('.','') * nHab)/*,
+                Valor: Number(d["Valor"].replace(/\./g,'') * nHab)/*,
                 Unidad: "TEP"),
                 Frecuencia: Number(d["Frecuencia"])*/
             };
@@ -112,6 +114,42 @@ function sameUnitIndicators(d, habitantes){
         }
     }
     return d;
+}
+
+
+function addNewIndicators(data){
+    data = data.concat(generateProductionSum(data));
+
+    mainWithData(data);
+}
+
+function generateProductionSum(data){
+    //console.log(indicadoresProduccion);
+    var productionSum = new Array();
+
+    data.forEach(function(d) {
+        if(contains(indicadoresProduccion, String(d.Indicador))){
+            if ((dat = productionSum.filter(isCorrect2(d.Provincia, d.FechaValidez))[0]) == undefined){
+                productionSum.push(
+                    {
+                        Indicador: "ProducciónFinal",
+                        Provincia: d.Provincia,
+                        FechaValidez: d.FechaValidez,
+                        Valor: d.Valor/*,
+                        Unidad: String(d["Unidad"].toUpperCase()),
+                        Frecuencia: Number(d["Frecuencia"])*/
+                    }
+                );
+
+            } else {
+                dat.Valor = dat.Valor + d.Valor;
+                //console.log(dat);
+
+            }
+        }
+    });
+    //console.log(productionSum);
+    return productionSum;
 }
 
 
