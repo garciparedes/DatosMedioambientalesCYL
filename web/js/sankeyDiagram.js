@@ -50,10 +50,10 @@ function generateSankeyDiagram(data){
             {source: 10, target: 13, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
             {source: 10, target: 18, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
 
-            {source: 13, target: 14, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 13, target: 15, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 13, target: 16, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 13, target: 17, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor}
+            {source: 13, target: 14, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
+            {source: 13, target: 15, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
+            {source: 13, target: 16, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
+            {source: 13, target: 17, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4}
 
         ]
       };

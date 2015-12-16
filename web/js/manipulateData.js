@@ -168,8 +168,8 @@ function addNewIndicators(data){
     ];
 
     data = data.concat(
-        generateProductionSum(data, indicadoresProduccionRenobable, "ProducciónNoRenovable"),
-        generateProductionSum(data, indicadoresProduccionNoRenobable, "ProducciónRenovable"),
+        generateProductionSum(data, indicadoresProduccionNoRenobable, "ProducciónNoRenovable"),
+        generateProductionSum(data, indicadoresProduccionRenobable, "ProducciónRenovable"),
         generateProductionSum(data, indicadoresProduccion, "ProducciónFinal"),
         generateProductionSum(data, indicadoresConsumoDomestico, "ConsumoDoméstico")
     );
