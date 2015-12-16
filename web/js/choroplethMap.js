@@ -41,7 +41,7 @@ function setAttr(provincia){
 function setOnClick(provincia){
     d3.select("#" + provincia.Provincia)
         .on("click",function(){
-            changeProvince(provincia);
+            changeProvince(provincia.Provincia);
     });
 }
 

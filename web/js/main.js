@@ -39,7 +39,7 @@ function mainWithData(data){
                 datt, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"]));
 
     }
-    console.log(provinciasChoroplet);
+    //console.log(provinciasChoroplet);
 
 
     provinciasProductionLinechart = new Array();
@@ -60,10 +60,10 @@ function mainWithData(data){
 
     }
 
-    globalProductionLinechart = getAllYearAllProvinceData(data, indicadoresProduccion),
-    globalConsumptionLinechart = getAllYearAllProvinceData(data, ["Consumo de energía final"]),
+    globalProductionLinechart = getAllYearAllProvinceData(data, indicadoresProduccion);
+    globalConsumptionLinechart = getAllYearAllProvinceData(data, ["Consumo de energía final"]);
     //console.log(getAllYearOneProvinceData(data, "Valladolid", indicadoresProduccion));
-    console.log(provinciasConsumptionLinechart);
+    //console.log(provinciasConsumptionLinechart);
     //console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
     //console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
     //console.log(getOneYearAllProvinceOneDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"], 2010));
@@ -134,6 +134,7 @@ function mainWithData(data){
 
     generateLineChart(
         globalProductionLinechart,
+
         globalConsumptionLinechart,
         2010
     );
@@ -158,9 +159,10 @@ function changeProvince(province){
     console.log(province);
 
     updateLineChart(
-        getAllYearOneProvinceData(datt,province.Provincia, indicadoresProduccion),
-        getAllYearOneProvinceData(datt,province.Provincia, ["Consumo de energía final"])
+        provinciasProductionLinechart.filter(isCorrectProvince(province)),
+        provinciasConsumptionLinechart.filter(isCorrectProvince(province))
     );
+
 }
 
 function changeDate(date){
