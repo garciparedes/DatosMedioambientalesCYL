@@ -18,9 +18,7 @@ var indicadoresConsumo = [
 ];
 
 function mainJS(){
-
-    var fileName ="data/indicadores_medioambientales.csv";
-    extract(fileName, indicadoresProduccion.concat(indicadoresConsumo));
+    extract(indicadoresProduccion.concat(indicadoresConsumo));
 }
 
 function mainWithData(data){
