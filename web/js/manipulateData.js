@@ -118,21 +118,54 @@ function sameUnitIndicators(d, habitantes){
 
 
 function addNewIndicators(data){
-    data = data.concat(generateProductionSum(data));
+    var indicadoresProduccion = [
+        "Producción de energía con carbón",
+        "Producción de energía eólica",
+        "Producción de energía hidráulica",
+        "Producción de energía nuclear",
+        "Producción de energía primaria",
+        "Producción energía solar en Castilla y León"
+    ];
+
+    var indicadoresProduccionRenobable = [
+        "Producción de energía eólica",
+        "Producción de energía hidráulica",
+        "Producción de energía primaria",
+        "Producción energía solar en Castilla y León"
+    ];
+
+    var indicadoresProduccionNoRenobable = [
+        "Producción de energía con carbón",
+        "Producción de energía nuclear"
+    ];
+
+    var indicadoresConsumoDomestico = [
+        "Consumo doméstico de electricidad",
+        "Consumo doméstico de gas natural",
+        "Consumo doméstico de G.L.P.",
+        "Consumo doméstico de productos petrolíferos"
+    ];
+
+    data = data.concat(
+        generateProductionSum(data, indicadoresProduccionRenobable, "ProducciónNoRenovable"),
+        generateProductionSum(data, indicadoresProduccionNoRenobable, "ProducciónRenovable"),
+        generateProductionSum(data, indicadoresProduccion, "ProducciónFinal"),
+        generateProductionSum(data, indicadoresConsumoDomestico, "ConsumoDoméstico")
+    );
 
     mainWithData(data);
 }
 
-function generateProductionSum(data){
+function generateProductionSum(data, indicators, id){
     //console.log(indicadoresProduccion);
-    var productionSum = new Array();
+    var sum = new Array();
 
     data.forEach(function(d) {
-        if(contains(indicadoresProduccion, String(d.Indicador))){
-            if ((dat = productionSum.filter(isCorrect2(d.Provincia, d.FechaValidez))[0]) == undefined){
-                productionSum.push(
+        if(contains(indicators, String(d.Indicador))){
+            if ((dat = sum.filter(isCorrect2(d.Provincia, d.FechaValidez))[0]) == undefined){
+                sum.push(
                     {
-                        Indicador: "ProducciónFinal",
+                        Indicador: id,
                         Provincia: d.Provincia,
                         FechaValidez: d.FechaValidez,
                         Valor: d.Valor/*,
@@ -148,8 +181,7 @@ function generateProductionSum(data){
             }
         }
     });
-    //console.log(productionSum);
-    return productionSum;
+    return sum;
 }
 
 
