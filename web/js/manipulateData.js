@@ -173,7 +173,7 @@ function addNewIndicators(data){
         generateProductionSum(data, indicadoresProduccion, "ProducciónFinal"),
         generateProductionSum(data, indicadoresConsumoDomestico, "ConsumoDoméstico")
     );
-
+    datt = data
     mainWithData(data);
 }
 

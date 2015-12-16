@@ -17,63 +17,38 @@ var indicadoresConsumo = [
     "Consumo doméstico de productos petrolíferos"
 ];
 
+var provinciasName = ["León", "Palencia", "Burgos", "Zamora",
+                    "Valladolid", "Soria", "Salamanca", "Ávila", "Segovia"];
+
+
 function mainJS(){
     extract(indicadoresProduccion.concat(indicadoresConsumo));
 }
 
 function mainWithData(data){
-    console.log(data.length);
+    //console.log(data.length);
     console.log(data);
 
     //console.log(getAllYearOneProvinceData(data, "Valladolid", indicadoresProduccion));
-    console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
-    console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
-    console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
-    console.log(getOneYearAllProvinceOneDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"], 2010));
+    //console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
+    //console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
+    //console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
+    //console.log(getOneYearAllProvinceOneDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"], 2010));
 
-    console.log(getOneYearAllProvinceData(data, 2010));
+    //console.log(getOneYearAllProvinceData(data, 2010));
 
-    console.log(getOneYearOneProvinceData(data, 2010, "Palencia"));
+    //console.log(getOneYearOneProvinceData(data, 2010, "Palencia"));
+    var provincias = new Array();
+    var i;
+    var date = 2000;
+    for(i = 0; i < provinciasName.length; i++){
+        provincias.push(
+            getOneYearAllProvinceOneDataRatio(
+                data, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"], date));
+    }
+    console.log(provincias);
 
-    var provincias =
-        [
-            {
-                Name: 'leon',
-                Index: 0.2
-            },
-            {
-                Name: 'palencia',
-                Index: -0.5
-            },
-            {
-                Name: 'burgos',
-                Index: 0.2
-            },
-            {
-                Name: 'salamanca',
-                Index: 0.5
-            },
-            {
-                Name: 'valladolid',
-                Index: 0.2
-            },
-            {
-                Name: 'zamora',
-                Index: 0.2
-            },
-            {
-                Name: 'avila',
-                Index: 0.7
-            },
-            {
-                Name: 'segovia',
-                Index: -0.2
-            },
-            {
-                Name: 'soria',
-                Index: 0.2
-            }
-    ];
+    console.log(provincias);
 
     var energias = {
         nodes: [
@@ -158,9 +133,23 @@ function changeProvinceIndex(province, index){
 
 function changeProvince(province){
     console.log(province);
+
+    updateLineChart(
+        getAllYearOneProvinceData(datt,province.Provincia, indicadoresProduccion),
+        getAllYearOneProvinceData(datt,province.Provincia, ["Consumo de energía final"])
+    );
 }
 
 function changeDate(date){
 
-    console.log(date);
+    var provincias = new Array();
+    var i;
+    for(i = 0; i < provinciasName.length; i++){
+        provincias.push(
+            getOneYearAllProvinceOneDataRatio(
+                datt, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"], date));
+    }
+
+    updateMapColorProvince(provincias);
+
 }

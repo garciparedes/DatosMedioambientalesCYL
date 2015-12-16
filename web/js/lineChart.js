@@ -50,7 +50,7 @@ function generateLineChart(blueData, orangeData, FechaValidez){
         .y(function(d) { return y(d.Valor); });
 
     d3.select("#lineChart")
-        .on("click", function(d){
+        .on("mouseover", function(d){
             var x = d3.mouse(this)[0]-margin.left;
             if (x >= 0 && x <= width ){
                 updateTimeLine(x)
@@ -117,5 +117,10 @@ function generateLineChart(blueData, orangeData, FechaValidez){
     }
 
     updateTimeLineFromDate(FechaValidez);
+
+}
+
+function updateLineChart(blueData, orangeData){
+
 
 }

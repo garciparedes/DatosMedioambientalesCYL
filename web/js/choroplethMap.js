@@ -1,9 +1,7 @@
 
-
-
-function getMapPallete(){
+function getMapPallete(min, max){
     return d3.scale.linear()
-        .domain([-1, 0, 1])
+        .domain([min, 0, max])
         .range(["orange", "white", "blue"]);
 }
 
@@ -29,25 +27,45 @@ function generateChoroplethMap(provincias){
         for ( i = 0; i < provincias.length; i++){
             setAttr(provincias[i]);
         }
+        updateMapColorProvince(provincias);
+
     });
 }
 
 
 function setAttr(provincia){
-    updateMapColorProvince(provincia);
+    if (provincia.Provincia == "León"){
+        provincia.Provincia = "leon";
+    } else if (provincia.Provincia == "Ávila"){
+        provincia.Provincia = "avila";
+
+    }
     setOnClick(provincia);
 }
 
 
 function setOnClick(provincia){
-    d3.select("#" + provincia.Name)
+    d3.select("#" + provincia.Provincia.toLowerCase())
         .on("click",function(){
             changeProvince(provincia);
     });
 }
 
 
-function updateMapColorProvince(provincia){
-    d3.select("#" + provincia.Name)
-        .style( "fill", getMapPallete()(provincia.Index));
+function updateMapColorProvince(provincias){
+    var max = d3.max(provincias, function(d){ return d.Ratio; })
+    var min = d3.min(provincias, function(d){ return d.Ratio; })
+
+    provincias.forEach(function (d) {
+        // body...
+
+        if (d.Provincia == "León"){
+            d.Provincia = "leon";
+        } else if (d.Provincia == "Ávila"){
+            d.Provincia = "avila";
+
+        }
+        d3.select("#" + d.Provincia.toLowerCase())
+            .style( "fill", getMapPallete(min,max)(d.Ratio));
+    });
 }
