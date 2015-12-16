@@ -28,7 +28,18 @@ function mainJS(){
 function mainWithData(data){
     //console.log(data.length);
     console.log(data);
+    datt = data;
 
+
+    provinciasChoroplet = new Array();
+    var i;
+    for(i = 0; i < provinciasName.length; i++){
+        provinciasChoroplet = provinciasChoroplet.concat(
+            getAllYearAllProvinceDataRatio(
+                datt, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"]));
+
+    }
+    console.log(provinciasChoroplet);
     //console.log(getAllYearOneProvinceData(data, "Valladolid", indicadoresProduccion));
     //console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
     //console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
@@ -142,14 +153,6 @@ function changeProvince(province){
 
 function changeDate(date){
 
-    var provincias = new Array();
-    var i;
-    for(i = 0; i < provinciasName.length; i++){
-        provincias.push(
-            getOneYearAllProvinceOneDataRatio(
-                datt, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"], date));
-    }
-
-    updateMapColorProvince(provincias);
+    updateMapColorProvince(provinciasChoroplet.filter(isCorrectDate(date)));
 
 }
