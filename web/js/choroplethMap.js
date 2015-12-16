@@ -34,18 +34,12 @@ function generateChoroplethMap(provincias){
 
 
 function setAttr(provincia){
-    if (provincia.Provincia == "León"){
-        provincia.Provincia = "leon";
-    } else if (provincia.Provincia == "Ávila"){
-        provincia.Provincia = "avila";
-
-    }
     setOnClick(provincia);
 }
 
 
 function setOnClick(provincia){
-    d3.select("#" + provincia.Provincia.toLowerCase())
+    d3.select("#" + provincia.Provincia)
         .on("click",function(){
             changeProvince(provincia);
     });
@@ -57,15 +51,7 @@ function updateMapColorProvince(provincias){
     var min = d3.min(provincias, function(d){ return d.Ratio; })
 
     provincias.forEach(function (d) {
-        // body...
-
-        if (d.Provincia == "León"){
-            d.Provincia = "leon";
-        } else if (d.Provincia == "Ávila"){
-            d.Provincia = "avila";
-
-        }
-        d3.select("#" + d.Provincia.toLowerCase())
+        d3.select("#" + d.Provincia)
             .style( "fill", getMapPallete(min,max)(d.Ratio));
     });
 }

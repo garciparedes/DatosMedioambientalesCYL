@@ -275,6 +275,7 @@ function getAllYearOneProvinceData(data, province, indicators){
                 sum.push(
                     {
                         FechaValidez: d.FechaValidez,
+                        Provincia: province,
                         Valor: d.Valor
                     }
                 );

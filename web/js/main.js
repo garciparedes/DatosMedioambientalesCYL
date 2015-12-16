@@ -27,7 +27,7 @@ function mainJS(){
 
 function mainWithData(data){
     //console.log(data.length);
-    console.log(data);
+    //console.log(data);
     datt = data;
 
 
@@ -40,8 +40,30 @@ function mainWithData(data){
 
     }
     console.log(provinciasChoroplet);
+
+
+    provinciasProductionLinechart = new Array();
+
+    for(i = 0; i < provinciasName.length; i++){
+        provinciasProductionLinechart = provinciasProductionLinechart.concat(
+            getAllYearOneProvinceData(
+                datt, provinciasName[i], indicadoresProduccion));
+
+    }
+
+    provinciasConsumptionLinechart = new Array();
+
+    for(i = 0; i < provinciasName.length; i++){
+        provinciasConsumptionLinechart = provinciasConsumptionLinechart.concat(
+            getAllYearOneProvinceData(
+                datt, provinciasName[i], ["Consumo de energía final"]));
+
+    }
+
+    globalProductionLinechart = getAllYearAllProvinceData(data, indicadoresProduccion),
+    globalConsumptionLinechart = getAllYearAllProvinceData(data, ["Consumo de energía final"]),
     //console.log(getAllYearOneProvinceData(data, "Valladolid", indicadoresProduccion));
-    //console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
+    console.log(provinciasConsumptionLinechart);
     //console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
     //console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
     //console.log(getOneYearAllProvinceOneDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"], 2010));
@@ -49,17 +71,7 @@ function mainWithData(data){
     //console.log(getOneYearAllProvinceData(data, 2010));
 
     //console.log(getOneYearOneProvinceData(data, 2010, "Palencia"));
-    var provincias = new Array();
-    var i;
     var date = 2000;
-    for(i = 0; i < provinciasName.length; i++){
-        provincias.push(
-            getOneYearAllProvinceOneDataRatio(
-                data, provinciasName[i], indicadoresProduccion, ["Consumo de energía final"], date));
-    }
-    console.log(provincias);
-
-    console.log(provincias);
 
     var energias = {
         nodes: [
@@ -118,11 +130,11 @@ function mainWithData(data){
         ]
       };
 
-    generateChoroplethMap(provincias);
+    generateChoroplethMap(provinciasChoroplet.filter(isCorrectDate(date)));
 
     generateLineChart(
-        getAllYearAllProvinceData(data, indicadoresProduccion),
-        getAllYearAllProvinceData(data, ["Consumo de energía final"]),
+        globalProductionLinechart,
+        globalConsumptionLinechart,
         2010
     );
     generateSankeyDiagram(energias);
