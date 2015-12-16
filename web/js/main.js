@@ -71,7 +71,7 @@ function mainWithData(data){
     //console.log(getOneYearAllProvinceData(data, 2010));
 
     //console.log(getOneYearOneProvinceData(data, 2010, "Palencia"));
-    var date = 2000;
+    var date = 2010;
 
     var energias = {
         nodes: [
@@ -136,12 +136,24 @@ function mainWithData(data){
         globalProductionLinechart,
 
         globalConsumptionLinechart,
-        2010
+        date
     );
     generateSankeyDiagram(energias);
 
 
     changeLinks(energias);
+    d3.select("#textProvince").text("Flujo Energético en " + "Castilla y León");
+
+    d3.select("#restoreProvince")
+        .text("Castilla y León")
+        .on("click", function(d){
+            updateLineChart(
+                globalProductionLinechart,
+                globalConsumptionLinechart
+            );
+            d3.select("#textProvince").text("Flujo Energético en " + "Castilla y León");
+
+        });
 }
 
 
@@ -157,7 +169,7 @@ function changeProvinceIndex(province, index){
 
 function changeProvince(province){
     console.log(province);
-
+    d3.select("#textProvince").text("Flujo Energético en " + province);
     updateLineChart(
         provinciasProductionLinechart.filter(isCorrectProvince(province)),
         provinciasConsumptionLinechart.filter(isCorrectProvince(province))

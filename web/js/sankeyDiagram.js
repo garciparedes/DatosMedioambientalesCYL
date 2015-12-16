@@ -10,7 +10,7 @@ function generateSankeyDiagram(data){
     };
 
     var width = 960 - margin.left - margin.right;
-    var height = 420 - margin.top - margin.bottom;
+    var height = 400 - margin.top - margin.bottom;
 
     var color = d3.scale.category20();
 
