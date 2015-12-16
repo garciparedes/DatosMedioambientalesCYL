@@ -17,10 +17,10 @@ function generateLineChart(blueData, orangeData, FechaValidez){
         height = 200 - margin.top - margin.bottom;
 
 
-    var x = d3.scale.linear()
+     x = d3.scale.linear()
         .range([0, width]);
 
-    var y = d3.scale.linear()
+     y = d3.scale.linear()
         .range([height, 0]);
 
 
@@ -30,7 +30,7 @@ function generateLineChart(blueData, orangeData, FechaValidez){
         .orient("bottom")
         .tickFormat(d3.format("g"));
 
-    var yAxis = d3.svg.axis()
+    yAxis = d3.svg.axis()
         .scale(y)
         .ticks(3)
         .orient("left")
@@ -45,7 +45,7 @@ function generateLineChart(blueData, orangeData, FechaValidez){
         .tickFormat("");
 
 
-    var line = d3.svg.line()
+    line = d3.svg.line()
         .x(function(d) { return x(d.FechaValidez); })
         .y(function(d) { return y(d.Valor); });
 
@@ -121,6 +121,21 @@ function generateLineChart(blueData, orangeData, FechaValidez){
 }
 
 function updateLineChart(blueData, orangeData){
+    console.log(blueData);
+    console.log(orangeData);
+    var svg = d3.select("#lineChart");
 
+    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.Valor; })]);
+
+    svg.select(".blueline")
+        .datum(blueData)
+        .attr("d", line);
+
+    svg.select(".orangeline")
+        .datum(orangeData)
+        .attr("d", line);
+
+    svg.select(".y")
+        .call(yAxis)
 
 }
