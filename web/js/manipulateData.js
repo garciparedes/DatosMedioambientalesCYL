@@ -53,6 +53,13 @@ function isCorrect2(provincia, fechaValidez) {
         return ( (value.Provincia == provincia) && (value.FechaValidez == fechaValidez)) ;
     }
 }
+
+function isCorrectDate( fechaValidez) {
+  return function(value) {
+        return (value.FechaValidez == fechaValidez);
+    }
+}
+
 function sameUnitIndicators(d, habitantes){
     var unit = String(d["Unidad"]);
 
@@ -184,6 +191,32 @@ function generateProductionSum(data, indicators, id){
     return sum;
 }
 
+
+function getYearDataOneProvince(data, province){
+
+}
+
+function getYearDataAllProvinces(data, indicators){
+    var sum = new Array();
+    data.forEach(function(d) {
+        if(contains(indicators, String(d.Indicador))){
+            if ((dat = sum.filter(isCorrectDate(d.FechaValidez))[0]) == undefined){
+                sum.push(
+                    {
+                        FechaValidez: d.FechaValidez,
+                        Valor: d.Valor
+                    }
+                );
+
+            } else {
+                dat.Valor += d.Valor;
+                //console.log(dat);
+
+            }
+        }
+    });
+    return sum;
+}
 
 /**
  * contains function.
