@@ -1,16 +1,16 @@
-function generateLineChart(blueData, orangeData, date){
+function generateLineChart(blueData, orangeData, FechaValidez){
     blueData.forEach(function(d) {
-        d.date = d.date,1,1;
-        d.value = +d.value;
+        d.FechaValidez = d.FechaValidez;
+        d.Valor = +d.Valor;
     });
 
     orangeData.forEach(function(d) {
-        d.date = d.date,1,1;
-        d.value = +d.value;
+        d.FechaValidez = d.FechaValidez;
+        d.Valor = +d.Valor;
     });
 
-    var maxDate = d3.max(blueData.concat(orangeData), function(d){ return d.date; })
-    var minDate = d3.min(blueData.concat(orangeData), function(d){ return d.date; })
+    var maxDate = d3.max(blueData.concat(orangeData), function(d){ return d.FechaValidez; })
+    var minDate = d3.min(blueData.concat(orangeData), function(d){ return d.FechaValidez; })
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = 960/2 - margin.left - margin.right,
@@ -46,8 +46,8 @@ function generateLineChart(blueData, orangeData, date){
 
 
     var line = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.value); });
+        .x(function(d) { return x(d.FechaValidez); })
+        .y(function(d) { return y(d.Valor); });
 
     d3.select("#lineChart")
         .on("click", function(d){
@@ -65,8 +65,8 @@ function generateLineChart(blueData, orangeData, date){
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    x.domain(d3.extent(blueData, function(d) { return d.date; }));
-    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.value; })]);
+    x.domain(d3.extent(blueData, function(d) { return d.FechaValidez; }));
+    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.Valor; })]);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -112,10 +112,15 @@ function generateLineChart(blueData, orangeData, date){
             .attr("x2", pos);
     }
 
-    function updateTimeLineFromDate(date){
-        updateTimeLine(width*(date-minDate)/(maxDate-minDate));
+    function updateTimeLineFromDate(FechaValidez){
+        updateTimeLine(width*(FechaValidez-minDate)/(maxDate-minDate));
     }
 
-    updateTimeLineFromDate(date);
+    updateTimeLineFromDate(FechaValidez);
+
+}
+
+function updateLineChart(blueData, orangeData){
+
 
 }
