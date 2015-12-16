@@ -1,47 +1,73 @@
-var provincias =
-    [
-        {
-            Name: 'leon',
-            Index: 0.2
-        },
-        {
-            Name: 'palencia',
-            Index: -0.5
-        },
-        {
-            Name: 'burgos',
-            Index: 0.2
-        },
-        {
-            Name: 'salamanca',
-            Index: 0.5
-        },
-        {
-            Name: 'valladolid',
-            Index: 0.2
-        },
-        {
-            Name: 'zamora',
-            Index: 0.2
-        },
-        {
-            Name: 'avila',
-            Index: 0.7
-        },
-        {
-            Name: 'segovia',
-            Index: -0.2
-        },
-        {
-            Name: 'soria',
-            Index: 0.2
-        }
+var indicadoresProduccion = [
+    "Producción de energía con carbón",
+    "Producción de energía eólica",
+    "Producción de energía hidráulica",
+    "Producción de energía nuclear",
+    "Producción de energía primaria",
+    "Producción energía solar en Castilla y León"
 ];
+
+var indicadoresConsumo = [
+    "Consumo de energía del sector del transporte",
+    "Consumo de energía del sector industrial",
+    "Consumo de energía final",
+    "Consumo doméstico de electricidad",
+    "Consumo doméstico de gas natural",
+    "Consumo doméstico de G.L.P.",
+    "Consumo doméstico de productos petrolíferos"
+];
+
 function mainJS(){
 
     var fileName ="data/indicadores_medioambientales.csv";
+    extract(fileName, indicadoresProduccion.concat(indicadoresConsumo));
+}
+
+function mainWithData(data){
+    console.log(data.length);
+    console.log(data);
 
 
+
+    var provincias =
+        [
+            {
+                Name: 'leon',
+                Index: 0.2
+            },
+            {
+                Name: 'palencia',
+                Index: -0.5
+            },
+            {
+                Name: 'burgos',
+                Index: 0.2
+            },
+            {
+                Name: 'salamanca',
+                Index: 0.5
+            },
+            {
+                Name: 'valladolid',
+                Index: 0.2
+            },
+            {
+                Name: 'zamora',
+                Index: 0.2
+            },
+            {
+                Name: 'avila',
+                Index: 0.7
+            },
+            {
+                Name: 'segovia',
+                Index: -0.2
+            },
+            {
+                Name: 'soria',
+                Index: 0.2
+            }
+    ];
 
     var energias = {
         nodes: [
@@ -218,17 +244,14 @@ function mainJS(){
             }
         ];
 
-    extract(fileName);
-
     generateChoroplethMap(provincias);
-    generateLineChart(production, consumption, 2013);
+    generateLineChart(production, consumption, 2010);
     generateSankeyDiagram(energias);
 
 
     changeLinks(energias);
-
-
 }
+
 
 function changeLinks(energias){
     energias.links[2]=  {source: 0, target: 4, value: 50.729};

@@ -1,11 +1,11 @@
 function generateLineChart(blueData, orangeData, date){
     blueData.forEach(function(d) {
-        d.date = d.date,1,1;
+        d.date = d.date;
         d.value = +d.value;
     });
 
     orangeData.forEach(function(d) {
-        d.date = d.date,1,1;
+        d.date = d.date;
         d.value = +d.value;
     });
 
