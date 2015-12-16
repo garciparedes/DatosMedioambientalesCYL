@@ -293,16 +293,26 @@ function getAllYearAllProvinceDataRatio(data, province, indicators1, indicators2
     var data1 = getAllYearOneProvinceData(data, province, indicators1).sort(compareDate);
     var data2 = getAllYearOneProvinceData(data, province, indicators2).sort(compareDate);
 
-    for( i = 0; i < data1.length && i < data2.length; i++){
+    for( i = 0; i < data1.length; i++){
         sum.push(
             {
                 Provincia: province,
+                FechaValidez: data1[i].FechaValidez,
                 Ratio: (data1[i].Valor / data2[i].Valor)-1
             }
         );
     }
 
     return sum;
+}
+
+function getOneYearAllProvinceOneDataRatio(data, province, indicators1, indicators2, date){
+    var dat =  getAllYearAllProvinceDataRatio(data, province, indicators1, indicators2);
+    var i = 0;
+    while ((dat[i].FechaValidez != date) && i < dat.length){
+        i++;
+    }
+    return  dat[i];
 }
 
 /**

@@ -29,10 +29,11 @@ function mainWithData(data){
     console.log(getAllYearOneProvinceData(data, "León", indicadoresProduccion));
     console.log(getAllYearOneProvinceData(data, "León", ["Consumo de energía final"]));
     console.log(getAllYearAllProvinceDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"]));
+    console.log(getOneYearAllProvinceOneDataRatio(data, "León", indicadoresProduccion, ["Consumo de energía final"], 2010));
 
     console.log(getOneYearAllProvinceData(data, 2010));
 
-    console.log(etOneYearOneProvinceData(data, 2010, "Palencia"));
+    console.log(getOneYearOneProvinceData(data, 2010, "Palencia"));
 
     var provincias =
         [
