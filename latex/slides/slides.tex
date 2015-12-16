@@ -1,0 +1,70 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{CambridgeUS}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algpseudocode}% http://ctan.org/pkg/algorithmicx
+
+\title[Análisis y Visualización de Datos MedioAmbientales de Castilla y León]{Análisis y Visualización de Datos MedioAmbientales de Castilla y León}
+\subtitle[Diseño y Evaluación de Sistemas Interactivos]{Diseño y Evaluación de Sistemas Interactivos}
+
+\author{Sergio García Prado\\}
+
+\date{17 de Diciembre de 2015}
+
+% Add support for \subsubsectionpage
+\def\subsubsectionname{\translate{Subsubsection}}
+\def\insertsubsubsectionnumber{\arabic{subsubsection}}
+\setbeamertemplate{subsubsection page}
+{
+  \begin{centering}
+    {\usebeamerfont{subsubsection name}\usebeamercolor[fg]{subsubsection name}\subsubsectionname~\insertsubsubsectionnumber}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=4pt,center]{part title}
+      \usebeamerfont{subsubsection title}\insertsubsubsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+\def\subsubsectionpage{\usebeamertemplate*{subsubsection page}}
+
+\AtBeginSection{\frame{\sectionpage}}
+\AtBeginSubsection{\frame{\subsectionpage}}
+\AtBeginSubsubsection{\frame{\subsubsectionpage}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%
+
+	\begin{frame}
+		\titlepage
+	\end{frame}
+
+%%%%%%%%%%%%%%%
+	
+	\begin{frame}
+		\tableofcontents
+	\end{frame}
+
+%%%%%%%%%%%%%%%
+
+	\section{Introducción}
+
+		\begin{frame}{Objetivos}
+ 			La representación gráfica de datos medioambientales de la Comunidad Autónoma de Castilla y León. El objetivo de la práctica es descubrir aspectos poco obvios o destacar algo importante del conjunto de datos asignados.
+
+		\end{frame}
+\section{Fin}
+
+
+\end{document}
