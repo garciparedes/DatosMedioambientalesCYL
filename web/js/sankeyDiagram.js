@@ -1,6 +1,63 @@
 function generateSankeyDiagram(data){
 
 
+    var dataSankey = {
+        nodes: [
+          {name: "Producción Interna"},
+          {name: "Producción Externa"},
+          {name: "Renovables"},
+          {name: "No Renovables"},
+          {name: "Carbón"},
+          {name: "Eólica"},
+          {name: "Hidráulica"},
+          {name: "Nuclear"},
+          {name: "Primaria"},
+          {name: "Solar"},
+          {name: "Consumo"},
+          {name: "Transporte"},
+          {name: "Industrial"},
+          {name: "Doméstico"},
+          {name: "Electricidad"},
+          {name: "Gas Natural"},
+          {name: "G.L.P."},
+          {name: "Petróleo"},
+          {name: "Exportación"}
+        ],
+        links: [
+            {source: 0, target: 2, value: 4},
+            {source: 0, target: 3, value: 2},
+
+            {source: 3, target: 4, value: 1},
+            {source: 3, target: 7, value: 1},
+
+            {source: 2, target: 5, value: 1},
+            {source: 2, target: 6, value: 1},
+            {source: 2, target: 8, value: 1},
+            {source: 2, target: 9, value: 1},
+
+
+            {source: 4, target: 10, value: 1},
+            {source: 5, target: 10, value: 1},
+            {source: 6, target: 10, value: 1},
+            {source: 7, target: 10, value: 1},
+            {source: 8, target: 10, value: 1},
+            {source: 9, target: 10, value: 1},
+            {source: 1, target: 10, value: 1},
+
+
+            {source: 10, target: 11, value: 1},
+            {source: 10, target: 12, value: 1},
+            {source: 10, target: 13, value: 4},
+            {source: 10, target: 18, value: 1},
+
+            {source: 13, target: 14, value: 1},
+            {source: 13, target: 15, value: 1},
+            {source: 13, target: 16, value: 1},
+            {source: 13, target: 17, value: 1}
+
+        ]
+      };
+
     // Some setup stuff.
     var margin = {
         top: 1,
@@ -10,7 +67,7 @@ function generateSankeyDiagram(data){
     };
 
     var width = 960 - margin.left - margin.right;
-    var height = 420 - margin.top - margin.bottom;
+    var height = 400 - margin.top - margin.bottom;
 
     var color = d3.scale.category20();
 
@@ -31,20 +88,20 @@ function generateSankeyDiagram(data){
         .nodeWidth(100)
         .nodePadding(50)
         .size([width, height])
-        .nodes(data.nodes)
-        .links(data.links)
+        .nodes(dataSankey.nodes)
+        .links(dataSankey.links)
         .layout(32);
 
 
 
-    // Path data generator.
+    // Path dataSankey generator.
     var path = sankey.link();
 
 
 
     // Draw the links.
     var links = svg.append("g").selectAll(".link")
-        .data(data.links)
+        .data(dataSankey.links)
         .enter()
         .append("path")
         .attr({
@@ -65,7 +122,7 @@ function generateSankeyDiagram(data){
 
     // Draw the nodes.
     var nodes = svg.append("g").selectAll(".node")
-        .data(data.nodes)
+        .data(dataSankey.nodes)
         .enter()
         .append("g")
         .attr({

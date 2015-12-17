@@ -28,6 +28,7 @@ body {
             opacity: 0.7;
 }
 
+
 .grid path {
     display: node;
 }
@@ -44,9 +45,24 @@ body {
   stroke-width: 1.5px;
 }
 
+#restoreProvince {
+    float: right;
+
+}
+
+
 .content{
     width: 960px;
     margin:0 auto;
+}
+
+#textProvince{
+    font-size: 250%;
+}
+#restoreProvince{
+    width: 150px;
+    height: 46px;
+    font-size: 112%;
 }
 #lineChart {
     display: table-cell;

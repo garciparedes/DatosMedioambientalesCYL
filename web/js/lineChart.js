@@ -1,26 +1,26 @@
-function generateLineChart(blueData, orangeData, date){
+function generateLineChart(blueData, orangeData, FechaValidez){
     blueData.forEach(function(d) {
-        d.date = d.date,1,1;
-        d.value = +d.value;
+        d.FechaValidez = d.FechaValidez;
+        d.Valor = +d.Valor;
     });
 
     orangeData.forEach(function(d) {
-        d.date = d.date,1,1;
-        d.value = +d.value;
+        d.FechaValidez = d.FechaValidez;
+        d.Valor = +d.Valor;
     });
 
-    var maxDate = d3.max(blueData.concat(orangeData), function(d){ return d.date; })
-    var minDate = d3.min(blueData.concat(orangeData), function(d){ return d.date; })
+    var maxDate = d3.max(blueData.concat(orangeData), function(d){ return d.FechaValidez; })
+    var minDate = d3.min(blueData.concat(orangeData), function(d){ return d.FechaValidez; })
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 960/2 - margin.left - margin.right,
-        height = 200 - margin.top - margin.bottom;
+        width = (960+200)/2 - margin.left - margin.right,
+        height = 270 - margin.top - margin.bottom;
 
 
-    var x = d3.scale.linear()
+     x = d3.scale.linear()
         .range([0, width]);
 
-    var y = d3.scale.linear()
+     y = d3.scale.linear()
         .range([height, 0]);
 
 
@@ -30,9 +30,9 @@ function generateLineChart(blueData, orangeData, date){
         .orient("bottom")
         .tickFormat(d3.format("g"));
 
-    var yAxis = d3.svg.axis()
+    yAxis = d3.svg.axis()
         .scale(y)
-        .ticks(3)
+        .ticks(5)
         .orient("left")
         .tickFormat(d3.format("s"));
 
@@ -40,14 +40,14 @@ function generateLineChart(blueData, orangeData, date){
     var yGrid = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .ticks(3)
+        .ticks(5)
         .tickSize(-width,0,0)
         .tickFormat("");
 
 
-    var line = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.value); });
+    line = d3.svg.line()
+        .x(function(d) { return x(d.FechaValidez); })
+        .y(function(d) { return y(d.Valor); });
 
     d3.select("#lineChart")
         .on("click", function(d){
@@ -65,8 +65,8 @@ function generateLineChart(blueData, orangeData, date){
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    x.domain(d3.extent(blueData, function(d) { return d.date; }));
-    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.value; })]);
+    x.domain(d3.extent(blueData, function(d) { return d.FechaValidez; }));
+    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.Valor; })]);
 
     svg.append("g")
         .attr("class", "x axis")
@@ -98,6 +98,22 @@ function generateLineChart(blueData, orangeData, date){
         .attr("class", "orangeline")
         .attr("d", line);
 
+    // Add the Legend
+    svg.append("text")
+        .attr("x", (width/4)+310) // spacing
+        .attr("y", (margin.bottom)-20)
+        .style("fill", function() { // dynamic colours
+            return "steelblue"; })
+        .text("Producción");
+
+    // Add the Legend
+    svg.append("text")
+        .attr("x", (width/4)+310) // spacing
+        .attr("y", (margin.bottom))
+        .style("fill", function() { // dynamic colours
+            return "orange"; })
+        .text("Consumo");
+
     var timeLine = svg.append("line")
         .attr("x1", 0)
         .attr("y1", 0)
@@ -112,10 +128,28 @@ function generateLineChart(blueData, orangeData, date){
             .attr("x2", pos);
     }
 
-    function updateTimeLineFromDate(date){
-        updateTimeLine(width*(date-minDate)/(maxDate-minDate));
+    function updateTimeLineFromDate(FechaValidez){
+        updateTimeLine(width*(FechaValidez-minDate)/(maxDate-minDate));
     }
 
-    updateTimeLineFromDate(date);
+    updateTimeLineFromDate(FechaValidez);
+
+}
+
+function updateLineChart(blueData, orangeData){
+    var svg = d3.select("#lineChart");
+
+    y.domain([0, d3.max(blueData.concat(orangeData), function(d){ return d.Valor; })]);
+
+    svg.select(".blueline")
+        .datum(blueData)
+        .attr("d", line);
+
+    svg.select(".orangeline")
+        .datum(orangeData)
+        .attr("d", line);
+
+    svg.select(".y")
+        .call(yAxis)
 
 }
