@@ -98,6 +98,22 @@ function generateLineChart(blueData, orangeData, FechaValidez){
         .attr("class", "orangeline")
         .attr("d", line);
 
+    // Add the Legend
+    svg.append("text")
+        .attr("x", (width/4)+310) // spacing
+        .attr("y", (margin.bottom)-20)
+        .style("fill", function() { // dynamic colours
+            return "steelblue"; })
+        .text("Producción");
+
+    // Add the Legend
+    svg.append("text")
+        .attr("x", (width/4)+310) // spacing
+        .attr("y", (margin.bottom))
+        .style("fill", function() { // dynamic colours
+            return "orange"; })
+        .text("Consumo");
+
     var timeLine = svg.append("line")
         .attr("x1", 0)
         .attr("y1", 0)
