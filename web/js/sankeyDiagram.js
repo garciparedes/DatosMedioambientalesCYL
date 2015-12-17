@@ -24,36 +24,36 @@ function generateSankeyDiagram(data){
           {name: "Exportación"}
         ],
         links: [
-            {source: 0, target: 2, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 0, target: 3, value: data.filter(isCorrectIndicator("ProducciónNoRenovable"))[0].Valor},
+            {source: 0, target: 2, value: 4},
+            {source: 0, target: 3, value: 2},
 
-            {source: 3, target: 4, value: data.filter(isCorrectIndicator("Producción de energía con carbón"))[0].Valor},
-            {source: 3, target: 7, value: data.filter(isCorrectIndicator("Producción de energía nuclear"))[0].Valor},
+            {source: 3, target: 4, value: 1},
+            {source: 3, target: 7, value: 1},
 
-            {source: 2, target: 5, value: data.filter(isCorrectIndicator("Producción de energía eólica"))[0].Valor},
-            {source: 2, target: 6, value: data.filter(isCorrectIndicator("Producción de energía hidráulica"))[0].Valor},
-            {source: 2, target: 8, value: data.filter(isCorrectIndicator("Producción de energía primaria"))[0].Valor},
-            {source: 2, target: 9, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-
-
-            {source: 4, target: 10, value: data.filter(isCorrectIndicator("Producción de energía con carbón"))[0].Valor},
-            {source: 5, target: 10, value: data.filter(isCorrectIndicator("Producción de energía eólica"))[0].Valor},
-            {source: 6, target: 10, value: data.filter(isCorrectIndicator("Producción de energía hidráulica"))[0].Valor},
-            {source: 7, target: 10, value: data.filter(isCorrectIndicator("Producción de energía nuclear"))[0].Valor},
-            {source: 8, target: 10, value: data.filter(isCorrectIndicator("Producción de energía primaria"))[0].Valor},
-            {source: 9, target: 10, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 1, target: 10, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
+            {source: 2, target: 5, value: 1},
+            {source: 2, target: 6, value: 1},
+            {source: 2, target: 8, value: 1},
+            {source: 2, target: 9, value: 1},
 
 
-            {source: 10, target: 11, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 10, target: 12, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 10, target: 13, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
-            {source: 10, target: 18, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor},
+            {source: 4, target: 10, value: 1},
+            {source: 5, target: 10, value: 1},
+            {source: 6, target: 10, value: 1},
+            {source: 7, target: 10, value: 1},
+            {source: 8, target: 10, value: 1},
+            {source: 9, target: 10, value: 1},
+            {source: 1, target: 10, value: 1},
 
-            {source: 13, target: 14, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
-            {source: 13, target: 15, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
-            {source: 13, target: 16, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4},
-            {source: 13, target: 17, value: data.filter(isCorrectIndicator("ProducciónRenovable"))[0].Valor/4}
+
+            {source: 10, target: 11, value: 1},
+            {source: 10, target: 12, value: 1},
+            {source: 10, target: 13, value: 4},
+            {source: 10, target: 18, value: 1},
+
+            {source: 13, target: 14, value: 1},
+            {source: 13, target: 15, value: 1},
+            {source: 13, target: 16, value: 1},
+            {source: 13, target: 17, value: 1}
 
         ]
       };
