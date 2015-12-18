@@ -144,14 +144,14 @@ function addNewIndicators(data){
         "Producción de energía eólica",
         "Producción de energía hidráulica",
         "Producción de energía nuclear",
-        //"Producción de energía primaria",
+        "Producción de energía primaria",
         "Producción energía solar en Castilla y León"
     ];
 
     var indicadoresProduccionRenobable = [
         "Producción de energía eólica",
         "Producción de energía hidráulica",
-        //"Producción de energía primaria",
+        "Producción de energía primaria",
         "Producción energía solar en Castilla y León"
     ];
 
@@ -259,8 +259,6 @@ function getAllYearAllProvinceData(data, indicators){
 
             } else {
                 dat.Valor += d.Valor;
-                //console.log(dat);
-
             }
         }
     });
