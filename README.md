@@ -8,7 +8,7 @@ Práctica sobre la representación de datos con la herramienta [D3.js](http://d3
 Los datos han sido obtenido a partir de la plataforma de Datos Abiertos de la Comunidad Autónoma de Castilla y León.
 
 
-##Contenido
+## Contenido
 
 [Proyecto Web](web/)
 
