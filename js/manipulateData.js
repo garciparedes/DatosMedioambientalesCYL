@@ -9,7 +9,7 @@
  * @param {array} indicatorList Array of indicator names which we need.
  */
 function extract( indicatorList){
-    var fileName ="data/indicadores_medioambientales.csv";
+    var fileName ="https://raw.githubusercontent.com/garciparedes/DatosMedioambientalesCYL/gh-pages/data/Indicadores_medioambientales.csv";
 
     d3.dsv(";", "text/plain; charset=ISO-8859-1")(fileName, function(data) {
         var formatedData = new Array();
